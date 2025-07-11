@@ -1,4 +1,4 @@
-import TQProvider from './providers/TQProvider';
+import TQProvider from './app/TQProvider';
 
 function App() {
   return (
