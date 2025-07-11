@@ -1,10 +1,11 @@
-import TQProvider from './app/TQProvider';
+import Router from '@app/Router';
+import TQProvider from '@/app/TQProvider';
 
 function App() {
   return (
     <>
       <TQProvider>
-        <div className="font-bold text-5xl">tailwind 테스트</div>
+        <Router />
       </TQProvider>
     </>
   );
