@@ -1,7 +1,11 @@
+import TQProvider from './providers/TQProvider';
+
 function App() {
   return (
     <>
-      <div className="font-bold text-5xl">tailwind 테스트</div>
+      <TQProvider>
+        <div className="font-bold text-5xl">tailwind 테스트</div>
+      </TQProvider>
     </>
   );
 }
