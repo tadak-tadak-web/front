@@ -1,7 +1,6 @@
+import { IdInput, PasswordInput } from '@/features/auth';
 import {
   LoginButton,
-  IdInput,
-  PasswordInput,
   AutoLoginToggle,
   FindPasswordButton,
   GoToRegisterLink,
