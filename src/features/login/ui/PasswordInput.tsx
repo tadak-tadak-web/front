@@ -1,19 +1,23 @@
 import { useState } from 'react';
 
-interface InputProps {
+interface PasswordInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  className?: string;
 }
 
-export default function PasswordInput({ onChange, value }: InputProps) {
+export default function PasswordInput({
+  onChange,
+  value,
+  className,
+}: PasswordInputProps) {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className={`flex flex-col gap-1 ${className}`}>
       <label htmlFor="password" className="text-xl">
         비밀번호
       </label>
-
       <div className="relative">
         <input
           type={visible ? 'text' : 'password'}

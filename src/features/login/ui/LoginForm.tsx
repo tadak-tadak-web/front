@@ -1,9 +1,10 @@
-import { IdInput, PasswordInput } from '@/features/auth';
 import {
   LoginButton,
   AutoLoginToggle,
   FindPasswordButton,
   GoToRegisterLink,
+  IdInput,
+  PasswordInput,
 } from '@features/login';
 
 export default function LoginForm() {

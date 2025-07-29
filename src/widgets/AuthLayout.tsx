@@ -5,7 +5,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <>
       <section className="w-screen h-screen flex justify-center items-center flex-col bg-gradient-to-b from-[#ADD8E6] to-[#EEE8AA]">
-        <div className="md:w-3xl w-full h-screen flex flex-col justify-center items-center bg-white">
+        <div className="md:w-3xl w-full h-screen flex flex-col justify-center items-center bg-white px-6">
           <div className="w-full md:w-[360px]">
             <div className="text-center mb-6">
               <h1 className="text-5xl font-bold text-[#ADD8E6]">EduLearn</h1>

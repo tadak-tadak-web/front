@@ -1,11 +1,11 @@
-interface InputProps {
-  onChange: () => void;
+interface IdInputProps {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
 
-export default function IdInput({ onChange, value }: InputProps) {
+export default function IdInput({ onChange, value }: IdInputProps) {
   return (
-    <>
+    <div className="flex flex-col">
       <label htmlFor="id" className="text-xl">
         아이디
       </label>
@@ -17,6 +17,6 @@ export default function IdInput({ onChange, value }: InputProps) {
         onChange={onChange}
         value={value}
       />
-    </>
+    </div>
   );
 }
