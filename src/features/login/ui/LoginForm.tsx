@@ -4,6 +4,7 @@ import {
   PasswordInput,
   AutoLoginToggle,
   FindPasswordButton,
+  GoToRegisterLink,
 } from '@features/login';
 
 export default function LoginForm() {
@@ -17,6 +18,9 @@ export default function LoginForm() {
         <FindPasswordButton />
       </div>
       <LoginButton />
+      <div className="mt-5.5 flex justify-center">
+        <GoToRegisterLink />
+      </div>
     </form>
   );
 }

@@ -1,1 +1,1 @@
-export { default as AppLogo } from './AppLogo';
+export { default as AuthLayout } from './AuthLayout';
