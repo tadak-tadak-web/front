@@ -9,7 +9,7 @@ export default function RegisterForm() {
         label="비밀번호"
         onChange={() => {}}
         value={''}
-        hint="* 영문자, 숫자 포함 8~ 20 자리"
+        hint="* 영문자, 숫자 포함 8~20 자리"
       />
       <div className="mt-8" />
       <PasswordInput label="비밀번호 확인" onChange={() => {}} value={''} />
