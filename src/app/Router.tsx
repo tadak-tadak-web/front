@@ -1,4 +1,4 @@
-import { LoginPage, RegisterPage } from '@/pages';
+import { LectureDetail, LoginPage, RegisterPage } from '@/pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default function Router() {
@@ -7,6 +7,7 @@ export default function Router() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/lecture/:id" element={<LectureDetail />} />
       </Routes>
     </BrowserRouter>
   );
