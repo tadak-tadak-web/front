@@ -1,3 +1,9 @@
+import { DetailHeader } from '@/features/lecture-detail';
+
 export default function LectureDetail() {
-  return <>Lecture Detail</>;
+  return (
+    <>
+      <DetailHeader />
+    </>
+  );
 }
