@@ -16,16 +16,16 @@ export default function LectureItemList({
   materials,
 }: LectureItemListProps) {
   return (
-    <footer>
-      <ul>
+    <footer className="mt-12">
+      <ul className="flex flex-col gap-4">
         {videos.map((video, index) => (
-          <VideoItem key={`video-${index}`} title={video} />
-        ))}
-        {assignments.map((assignment, index) => (
-          <AssignmentsItem key={`assignment-${index}`} title={assignment} />
+          <VideoItem key={`video-${index}`} title={video} isWatched />
         ))}
         {materials.map((material, index) => (
           <MaterialsItem key={`material-${index}`} title={material} />
+        ))}
+        {assignments.map((assignment, index) => (
+          <AssignmentsItem key={`assignment-${index}`} title={assignment} />
         ))}
       </ul>
     </footer>
