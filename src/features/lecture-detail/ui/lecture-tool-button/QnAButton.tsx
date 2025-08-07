@@ -1,6 +1,6 @@
 export default function QnAButton() {
   return (
-    <button className="bg-white w-50 h-45 flex justify-center items-center">
+    <button className="bg-white w-50 h-45 flex justify-center items-center cursor-pointer">
       <div className="flex flex-col">
         <span className="bg-[#FFEACD] rounded-full flex items-center justify-center w-22.5 h-22.5">
           <svg
