@@ -16,7 +16,7 @@ export default function LectureItemList({
   materials,
 }: LectureItemListProps) {
   return (
-    <footer className="mt-12">
+    <footer className="mt-5 lg:mt-12">
       <ul className="flex flex-col gap-4">
         {videos.map((video, index) => (
           <VideoItem key={`video-${index}`} title={video} isWatched />

@@ -6,7 +6,7 @@ import {
 
 export default function LectureNav() {
   return (
-    <ul className="flex mt-18 gap-7 w-4xl">
+    <ul className="grid lg:grid-cols-[repeat(4,_160px)] grid-cols-[repeat(4,_minmax(0,_1fr))] justify-between mt-18 lg:w-4xl w-full lg:h-40 h-20 gap-5 lg:gap-0">
       <li>
         <AnnouncementButton />
       </li>

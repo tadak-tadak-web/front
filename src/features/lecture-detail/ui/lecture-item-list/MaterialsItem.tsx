@@ -9,14 +9,14 @@ export default function MaterialsItem({ title }: { title: string }) {
 
 function MaterialsIcon() {
   return (
-    <div className="w-15 h-15 flex items-center justify-center rounded-[10px] bg-[#00A5D4]">
+    <div className="size-10 lg:size-15 flex items-center justify-center rounded-[10px] bg-[#00A5D4]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-10 text-[#195BB2]"
+        className="size-1/2 text-[#195BB2]"
       >
         <path
           strokeLinecap="round"

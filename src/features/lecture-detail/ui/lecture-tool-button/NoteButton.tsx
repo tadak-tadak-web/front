@@ -1,15 +1,15 @@
 export default function NoteButton() {
   return (
-    <button className="bg-white w-50 h-45 flex justify-center items-center cursor-pointer">
-      <div className="flex flex-col">
-        <span className="bg-[#FFEACD] rounded-full flex items-center justify-center w-22.5 h-22.5">
+    <button className="bg-white size-full flex justify-center items-center cursor-pointer">
+      <div className="flex flex-col items-center">
+        <span className="bg-[#FFCDCD] rounded-full flex items-center justify-center size-10 lg:size-22.5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="white"
-            className="size-15"
+            className="size-1/2"
           >
             <path
               strokeLinecap="round"
@@ -18,7 +18,7 @@ export default function NoteButton() {
             />
           </svg>
         </span>
-        <span className="text-xl font-bold pt-4.5">질의 응답</span>
+        <span className="text-sm lg:text-xl  font-bold pt-4.5">강의 노트</span>
       </div>
     </button>
   );

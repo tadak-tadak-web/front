@@ -18,7 +18,7 @@ function VideoIcon({ isWatched }: { isWatched: boolean }) {
 
   return (
     <div
-      className={`w-15 h-15 flex items-center justify-center rounded-[10px] ${bgColor}`}
+      className={`size-10 lg:size-15 flex items-center justify-center rounded-[10px] ${bgColor}`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ function VideoIcon({ isWatched }: { isWatched: boolean }) {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className={`size-10 ${iconColor}`}
+        className={`size-1/2 ${iconColor}`}
       >
         <path
           strokeLinecap="round"
