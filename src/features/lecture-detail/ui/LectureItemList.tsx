@@ -1,3 +1,9 @@
+import {
+  AssignmentsItem,
+  MaterialsItem,
+  VideoItem,
+} from '@/features/lecture-detail';
+
 interface LectureItemListProps {
   videos: string[];
   assignments: string[];
@@ -13,13 +19,13 @@ export default function LectureItemList({
     <footer>
       <ul>
         {videos.map((video, index) => (
-          <li key={`video-${index}`}>{video}</li>
+          <VideoItem key={`video-${index}`} title={video} />
         ))}
         {assignments.map((assignment, index) => (
-          <li key={`assignment-${index}`}>{assignment}</li>
+          <AssignmentsItem key={`assignment-${index}`} title={assignment} />
         ))}
         {materials.map((material, index) => (
-          <li key={`material-${index}`}>{material}</li>
+          <MaterialsItem key={`material-${index}`} title={material} />
         ))}
       </ul>
     </footer>
