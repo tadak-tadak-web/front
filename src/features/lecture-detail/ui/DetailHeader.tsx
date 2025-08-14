@@ -3,7 +3,7 @@ import { UserCircleIcon, UserIcon } from '@heroicons/react/20/solid';
 
 export default function DetailHeader() {
   return (
-    <header className="w-full lg:px-19 lg:py-5 bg-[#005873] h-25 lg:h-50">
+    <header className="w-full lg:px-19 lg:py-5 bg-blue-400 h-25 lg:h-50">
       <div className="flex items-center h-full">
         <UserCircleIcon className="size-20 lg:size-40" fill="white" />
         <ul className="h-full flex flex-col justify-between py-2 lg:py-5 text-white ml-5">
