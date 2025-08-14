@@ -11,5 +11,5 @@ export default function RequireAuth() {
     return <Navigate to="/login" replace state={{ from: loc }} />;
   }
 
-  return <Outlet />;
+  return <Outlet context={user} />;
 }
