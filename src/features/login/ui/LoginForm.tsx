@@ -10,13 +10,13 @@ import {
 import { useState } from 'react';
 
 export default function LoginForm() {
-  const { mutate } = useLogin();
+  const { handleMutate } = useLogin();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutate({ id, password });
+    handleMutate({ id, password });
   };
 
   return (

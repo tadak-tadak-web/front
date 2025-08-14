@@ -12,8 +12,7 @@ export const authHandlers = [
           { message: 'Login successful' },
           {
             headers: {
-              'Set-Cookie':
-                'sessionId=abc123; Path=/; HttpOnly; Secure; SameSite=Strict',
+              'set-cookie': 'sessionId=abc123; Path=/; SameSite=Strict',
             },
           }
         );
