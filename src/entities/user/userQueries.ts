@@ -2,10 +2,11 @@ import { queryOptions } from '@tanstack/react-query';
 import { getUser } from '@entities/user';
 
 export const userQueries = {
-  all: () => ['user'] as const,
-  detail: (uid: string) =>
+  me: () =>
     queryOptions({
-      queryKey: [...userQueries.all(), uid],
-      queryFn: () => getUser(uid),
+      queryKey: ['me'],
+      queryFn: () => getUser(),
+      gcTime: Infinity,
+      staleTime: Infinity,
     }),
 };
