@@ -2,12 +2,12 @@ import { http, HttpResponse } from 'msw';
 
 // 로그인 핸들러
 export const authHandlers = [
-  http.post<object, { username: string; password: string }>(
+  http.post<object, { id: string; password: string }>(
     '/login',
     async ({ request }) => {
-      const { username, password } = await request.json();
+      const { id, password } = await request.json();
 
-      if (username === 'john' && password === 'secret') {
+      if (id === 'john' && password === 'secret') {
         return HttpResponse.json(
           { message: 'Login successful' },
           {
