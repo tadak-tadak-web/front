@@ -12,7 +12,7 @@ export const authHandlers = [
           { message: 'Login successful' },
           {
             headers: {
-              'set-cookie': 'sessionId=abc123; Path=/; SameSite=Strict',
+              'set-cookie': 'sessionId=abc123; Path=/api;',
             },
           }
         );
@@ -29,12 +29,17 @@ export const authHandlers = [
   http.get('/api/user', ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({
-        id: 'abc-123',
-        firstName: 'John',
-        lastName: 'Maverick',
+        data: {
+          id: 'abc-123',
+          firstName: 'John',
+          lastName: 'Maverick',
+        },
       });
     }
 
-    return HttpResponse.json({ message: 'Unauthorized' }, { status: 401 });
+    return HttpResponse.json(
+      { data: null, message: 'Unauthorized' },
+      { status: 200 }
+    );
   }),
 ];

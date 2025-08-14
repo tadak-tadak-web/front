@@ -6,10 +6,9 @@ import { userQueries } from '@/entities/user';
 export default function RequireAuth() {
   const loc = useLocation();
   const { data: user } = useSuspenseQuery(userQueries.me());
-
-  if (!user) {
+  if (!user.data) {
     return <Navigate to="/login" replace state={{ from: loc }} />;
   }
 
-  return <Outlet context={user} />;
+  return <Outlet context={user.data} />;
 }
