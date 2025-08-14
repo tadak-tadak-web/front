@@ -8,5 +8,8 @@ export const userQueries = {
       queryFn: () => getUser(),
       gcTime: Infinity,
       staleTime: Infinity,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
     }),
 };

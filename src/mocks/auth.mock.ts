@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 // 로그인 핸들러
 export const authHandlers = [
   http.post<object, { id: string; password: string }>(
-    '/login',
+    '/api/login',
     async ({ request }) => {
       const { id, password } = await request.json();
 
@@ -26,7 +26,7 @@ export const authHandlers = [
   ),
 
   // 로그인된 유저 정보 요청
-  http.get('/user', ({ cookies }) => {
+  http.get('/api/user', ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({
         id: 'abc-123',

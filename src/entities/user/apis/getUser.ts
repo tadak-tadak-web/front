@@ -1,4 +1,4 @@
 import type { User } from '@/entities/user';
-import ky from 'ky';
+import { api } from '@/shared';
 
-export const getUser = () => ky.get<User>('/user').json();
+export const getUser = () => api.get<User>('user').json();

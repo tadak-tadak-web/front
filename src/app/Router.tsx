@@ -9,15 +9,17 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          element={
+            <Suspense fallback={<LoadingSpinner />}>
+              <RequireAuth />
+            </Suspense>
+          }
+        >
+          <Route path="/lecture/:id" element={<LectureDetail />} />
+        </Route>
       </Routes>
-      <Suspense fallback={<LoadingSpinner />}>
-        <RequireAuth>
-          <Routes>
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/lecture/:id" element={<LectureDetail />} />
-          </Routes>
-        </RequireAuth>
-      </Suspense>
     </BrowserRouter>
   );
 }

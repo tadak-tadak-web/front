@@ -1,5 +1,5 @@
 import type { LoginRequest, User } from '@/entities/user';
-import ky from 'ky';
+import { api } from '@/shared';
 
 export const login = ({ id, password }: LoginRequest) =>
-  ky.post<User>('/login', { json: { id, password } }).json();
+  api.post<User>('/login', { json: { id, password } }).json();
