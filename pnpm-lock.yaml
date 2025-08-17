@@ -17,9 +17,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.82.0
         version: 5.82.0(react@19.1.0)
-      '@toss/ky':
-        specifier: ^1.2.1
-        version: 1.2.1
+      ky:
+        specifier: ^1.8.2
+        version: 1.8.2
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -672,9 +672,6 @@ packages:
     peerDependencies:
       react: ^18 || ^19
 
-  '@toss/ky@1.2.1':
-    resolution: {integrity: sha512-72qJyUVyyNC7d4EOKVyjPQH3UH3GnVSAo3mM+3vqGVTgh84vPPW3KPFvrV/DZe33dHMygCUsmIhnP9G5T5n9AQ==}
-
   '@types/cookie@0.6.0':
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
 
@@ -1082,6 +1079,10 @@ packages:
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
+
+  ky@1.8.2:
+    resolution: {integrity: sha512-XybQJ3d4Ea1kI27DoelE5ZCT3bSJlibYTtQuMsyzKox3TMyayw1asgQdl54WroAm+fIA3ZCr8zXW2RpR7qWVpA==}
+    engines: {node: '>=18'}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -1959,8 +1960,6 @@ snapshots:
       '@tanstack/query-core': 5.82.0
       react: 19.1.0
 
-  '@toss/ky@1.2.1': {}
-
   '@types/cookie@0.6.0': {}
 
   '@types/estree@1.0.8': {}
@@ -2394,6 +2393,8 @@ snapshots:
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
+
+  ky@1.8.2: {}
 
   levn@0.4.1:
     dependencies:

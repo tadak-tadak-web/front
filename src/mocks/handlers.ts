@@ -1,11 +1,3 @@
-import { http, HttpResponse } from 'msw';
+import { authHandlers } from '@/mocks/auth.mock';
 
-export const handlers = [
-  http.get('https://api.example.com/user', () => {
-    return HttpResponse.json({
-      id: 'abc-123',
-      firstName: 'John',
-      lastName: 'Maverick',
-    });
-  }),
-];
+export const handlers = [...authHandlers];
