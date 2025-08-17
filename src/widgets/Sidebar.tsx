@@ -1,19 +1,21 @@
 import { useLocation, Link } from "react-router-dom";
-import { sidebarMenus } from "./sidebarMenus";
 import clsx from "clsx";
+import { PAGES } from "@/shared/constants/pages";
 
 export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="w-[260px] h-screen border-r border-gray-200 p-6">
-      <Link to="/" className="flex items-center mb-8 gap-1">
+    <aside className="w-[260px] h-screen border-r border-gray-200 ">
+      <Link to="/" className="flex items-center pb-2 mb-2 gap-1 p-6">
         <img src="/logo.svg" alt="LemoHub Logo" className="ml-5 w-10 h-10" />
         <span className="text-2xl font-medium text-gray-500">LemoHub</span>
       </Link>
-      <ul className="space-y-2">
-        {sidebarMenus.map(({ label, path, icon: Icon }) => {
+      <hr className="text-gray-200" />
+      <ul className="space-y-2 p-6">
+        {PAGES.map(({ label, path, icon: Icon }) => {
           const isActive = location.pathname === path;
+
           return (
             <li key={path}>
               <Link

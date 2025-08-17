@@ -7,8 +7,13 @@ import {
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 
-export const sidebarMenus = [
-  { key: "home", label: "내 강의실", path: "/", icon: BookOpenIcon },
+export const PAGES = [
+  {
+    key: "home",
+    label: "내 강의실",
+    path: "/",
+    icon: BookOpenIcon,
+  },
   {
     key: "schedule",
     label: "학습 일정",
