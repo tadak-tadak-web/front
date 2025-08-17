@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import getCourseData from "@/entities/course/apis/getCourseData";
+import getCourse from "@/entities/course/apis/getCourse";
 
 export function useCourse() {
   return useQuery({
     queryKey: ["courseData"],
-    queryFn: getCourseData,
+    queryFn: getCourse,
   });
 }

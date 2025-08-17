@@ -1,16 +1,16 @@
-import { useKpiData } from "@/entities/kpi/hooks/useKpiData";
+import { useKpi } from "@/entities/kpi/hooks/useKpi";
 import KpiCard from "./KpiCard";
 import { LoadingSpinner } from "@/shared";
 
 export default function KpiRow() {
-  const { data, isLoading } = useKpiData();
+  const { data, isLoading } = useKpi();
 
   if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="flex flex-nowrap gap-5 overflow-x-auto">
-      {(data ?? []).map(({ id, title, value, diff }) => (
-        <KpiCard key={id} title={title} value={value} diff={diff} />
+      {(data ?? []).map((kpi) => (
+        <KpiCard key={kpi.id} kpi={kpi} />
       ))}
     </div>
   );

@@ -1,2 +1,2 @@
 export * from "./kpi-section";
-export * from "./lecture-section";
+export * from "./course-section";

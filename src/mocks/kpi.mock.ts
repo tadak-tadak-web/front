@@ -29,7 +29,7 @@ export const kpiMockData: Kpi[] = [
 ];
 
 export const kpiHandlers = [
-  http.get("/api/kpi", ({ cookies }) => {
+  http.get("/api/my-classroom/kpis", ({ cookies }) => {
     if (cookies.sessionId === "abc123") {
       return HttpResponse.json({
         data: kpiMockData,

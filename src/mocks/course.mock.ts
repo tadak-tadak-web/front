@@ -49,7 +49,7 @@ export const courseData: Course[] = [
 ];
 
 export const courseHandlers = [
-  http.get("/api/course", ({ cookies }) => {
+  http.get("/api/my-classroom/courses", ({ cookies }) => {
     if (cookies.sessionId === "abc123") {
       return HttpResponse.json({
         data: courseData,

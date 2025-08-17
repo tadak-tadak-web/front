@@ -5,11 +5,10 @@ import {
   DocumentCheckIcon,
 } from "@heroicons/react/24/outline";
 import { Card } from "@/shared/ui/Card";
+import type { Kpi } from "@/entities/kpi/types";
 
 interface KpiCardProps {
-  title: string;
-  value: number;
-  diff: number;
+  kpi: Kpi;
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -19,7 +18,8 @@ const iconMap: Record<string, React.ElementType> = {
   "제출한 과제": DocumentCheckIcon,
 };
 
-export default function KpiCard({ title, value, diff }: KpiCardProps) {
+export default function KpiCard({ kpi }: KpiCardProps) {
+  const { title, value, diff } = kpi;
   const Icon = iconMap[title] || BookOpenIcon;
   const isPositive = diff >= 0;
 
