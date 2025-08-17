@@ -1,5 +1,10 @@
-import { KpiRow } from "@/features/my-classroom/ui";
+import { KpiRow, CourseRow } from "@/features/my-classroom/ui";
 
 export default function MyClassroom() {
-  return <KpiRow />;
+  return (
+    <div className="flex flex-col gap-y-20">
+      <KpiRow />
+      <CourseRow />
+    </div>
+  );
 }
