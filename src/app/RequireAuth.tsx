@@ -1,7 +1,7 @@
 // app/guards/RequireAuth.tsx
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { userQueries } from '@/entities/user';
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { userQueries } from "@/entities/user";
 
 export default function RequireAuth() {
   const loc = useLocation();

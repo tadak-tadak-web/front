@@ -1,8 +1,9 @@
-import RequireAuth from '@/app/RequireAuth';
-import { LectureDetail, LoginPage, RegisterPage } from '@/pages';
-import { LoadingSpinner } from '@/shared';
-import { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import RequireAuth from "@/app/RequireAuth";
+import { LectureDetail, LoginPage, RegisterPage } from "@/pages";
+import MyClassroom from "@/pages/MyClassroom";
+import { LoadingSpinner } from "@/shared";
+import { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export default function Router() {
   return (
@@ -17,6 +18,7 @@ export default function Router() {
             </Suspense>
           }
         >
+          <Route path="/" element={<MyClassroom />} />
           <Route path="/lecture/:id" element={<LectureDetail />} />
         </Route>
       </Routes>
