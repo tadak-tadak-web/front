@@ -1,10 +1,15 @@
+import { useKpiData } from "@/entities/kpi/hooks/useKpiData";
 import KpiCard from "./KpiCard";
-import { KPIS } from "@/features/my-classroom/model";
+import { LoadingSpinner } from "@/shared";
 
 export default function KpiRow() {
+  const { data, isLoading } = useKpiData();
+
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <div className="flex flex-nowrap gap-5 overflow-x-auto">
-      {KPIS.map(({ id, title, value, diff }) => (
+      {(data ?? []).map(({ id, title, value, diff }) => (
         <KpiCard key={id} title={title} value={value} diff={diff} />
       ))}
     </div>
