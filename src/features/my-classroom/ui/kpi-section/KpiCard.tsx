@@ -1,26 +1,14 @@
-import {
-  BookOpenIcon,
-  ClipboardDocumentListIcon,
-  AcademicCapIcon,
-  DocumentCheckIcon,
-} from "@heroicons/react/24/outline";
 import { Card } from "@/shared/ui/Card";
 import type { Kpi } from "@/entities/kpi/types";
+import { iconMap } from "@/shared/constants/pages";
 
 interface KpiCardProps {
   kpi: Kpi;
 }
 
-const iconMap: Record<string, React.ElementType> = {
-  "진행한 강의": BookOpenIcon,
-  "완료한 강의": ClipboardDocumentListIcon,
-  "학습 시간": AcademicCapIcon,
-  "제출한 과제": DocumentCheckIcon,
-};
-
 export default function KpiCard({ kpi }: KpiCardProps) {
   const { title, value, diff } = kpi;
-  const Icon = iconMap[title] || BookOpenIcon;
+  const Icon = iconMap[title];
   const isPositive = diff >= 0;
 
   return (
