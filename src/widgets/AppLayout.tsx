@@ -12,11 +12,11 @@ export default function AppLayout() {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <main className="flex-1 overflow-auto bg-gray-100">
+      <main className="flex-1 overflow-auto bg-gray-50">
         <h1 className="text-2xl font-bold text-gray-800 mx-6 my-2 py-4">
           {title}
         </h1>
-        <hr className="text-gray-300" />
+        <hr className="text-gray-100" />
         <div className="p-6">
           <Outlet />
         </div>

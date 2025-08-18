@@ -13,7 +13,7 @@ export default function KpiCard({ kpi }: KpiCardProps) {
   const isPositive = diff >= 0;
 
   return (
-    <Card className="flex flex-col flex-1 min-w-[260px] gap-3 p-4 rounded-xl shadow-sm border-2 border-gray-200 bg-white">
+    <Card className="flex flex-col flex-1 min-w-[260px] gap-3 p-4 rounded-xl shadow-sm border-2 border-gray-100 bg-white">
       <div className="flex justify-between items-center gap-2">
         <span className="text-md text-gray-500 font-bold">{title}</span>
         <Icon className="w-8 h-8 text-gray-400" />

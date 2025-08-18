@@ -27,13 +27,13 @@ export default function CourseCard({ course }: CourseCardProps) {
       <div className="flex flex-col justify-between p-5 space-y-3 flex-1">
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-lg truncate">{title}</h2>
-          <div className="text-xs border border-gray-300 rounded-full px-2 py-0.5">
+          <div className="text-xs border border-gray-100 rounded-full px-2 py-0.5">
             {category}
           </div>
         </div>
 
         <div className="flex items-center space-x-2 text-sm text-gray-500">
-          <div className="w-5 h-5 rounded-full bg-gray-300" />
+          <div className="w-5 h-5 rounded-full bg-gray-100" />
           <div>{instructor}</div>
         </div>
 
@@ -42,9 +42,9 @@ export default function CourseCard({ course }: CourseCardProps) {
             <span>진행도</span>
             <span className="font-medium">{progress}%</span>
           </div>
-          <div className="h-2 w-full bg-gray-200 rounded-full">
+          <div className="h-2 w-full bg-gray-100 rounded-full">
             <div
-              className="h-full bg-gray-600 rounded-full transition-all"
+              className="h-full bg-gray-700 rounded-full transition-all"
               style={{ width: `${progress}%` }}
             />
           </div>
