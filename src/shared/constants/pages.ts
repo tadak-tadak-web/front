@@ -49,9 +49,11 @@ export const PAGES = [
   },
 ] as const;
 
-export const iconMap: Record<string, React.ElementType> = {
+export const ICON_MAP = {
   "진행한 강의": BookOpenIcon,
   "완료한 강의": ClipboardDocumentListIcon,
   "학습 시간": AcademicCapIcon,
   "제출한 과제": DocumentCheckIcon,
-};
+} as const;
+
+export type KpiIconMap = keyof typeof ICON_MAP;

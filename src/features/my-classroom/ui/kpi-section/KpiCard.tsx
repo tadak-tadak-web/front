@@ -1,6 +1,7 @@
 import { Card } from "@/shared/ui/Card";
 import type { Kpi } from "@/entities/kpi/types";
-import { iconMap } from "@/shared/constants/pages";
+import { ICON_MAP } from "@/shared/constants/pages";
+import type { KpiIconMap } from "@/shared/constants/pages";
 
 interface KpiCardProps {
   kpi: Kpi;
@@ -8,7 +9,7 @@ interface KpiCardProps {
 
 export default function KpiCard({ kpi }: KpiCardProps) {
   const { title, value, diff } = kpi;
-  const Icon = iconMap[title];
+  const Icon = ICON_MAP[title as KpiIconMap];
   const isPositive = diff >= 0;
 
   return (
