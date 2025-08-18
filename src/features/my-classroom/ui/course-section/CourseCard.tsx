@@ -17,15 +17,16 @@ export default function CourseCard({ course }: CourseCardProps) {
   } = course;
 
   return (
-    <div className="w-full h-[460px] rounded-xl shadow bg-white flex flex-col justify-between">
-      <div
-        className="w-full h-[160px] bg-gray-200 rounded-t-xl bg-cover bg-center"
-        style={{ backgroundImage: `url(${thumbnailUrl})` }}
+    <article className="w-full h-[460px] rounded-xl shadow bg-white flex flex-col justify-between">
+      <img
+        src="https://placehold.co/360x160/E2E8F0/000000"
+        alt={`강의 썸네일`}
+        className="w-full h-[160px] rounded-t-xl object-cover object-center"
       />
 
       <div className="flex flex-col justify-between p-5 space-y-3 flex-1">
         <div className="flex justify-between items-center">
-          <div className="font-semibold text-lg truncate">{title}</div>
+          <h2 className="font-semibold text-lg truncate">{title}</h2>
           <div className="text-xs border border-gray-300 rounded-full px-2 py-0.5">
             {category}
           </div>
@@ -55,14 +56,12 @@ export default function CourseCard({ course }: CourseCardProps) {
           </div>
         </div>
 
-        <div className="text-sm text-gray-700">
-          다음 강의: {nextLectureTitle}
-        </div>
+        <h3 className="text-sm text-gray-700">다음 강의: {nextLectureTitle}</h3>
 
         <button className="mt-4 w-full py-2 bg-black text-white text-sm rounded-md">
           ▶ 계속해서 수강하기
         </button>
       </div>
-    </div>
+    </article>
   );
 }
