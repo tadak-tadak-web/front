@@ -1,10 +1,10 @@
 import type { Course } from "@/entities/course/types";
 
-interface Props {
+interface CourseCardProps {
   course: Course;
 }
 
-export default function CourseCard({ course }: Props) {
+export default function CourseCard({ course }: CourseCardProps) {
   const {
     title,
     instructor,
