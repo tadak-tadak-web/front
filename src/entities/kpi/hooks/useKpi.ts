@@ -1,9 +1,6 @@
-import getKpi from "@/entities/kpi/apis/getKpi";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { kpiQueries } from "@/entities/kpi/kpiQueries";
 
-export const useKpi = () => {
-  return useQuery({
-    queryKey: ["kpi"],
-    queryFn: getKpi,
-  });
-};
+export function useKpi() {
+  return useSuspenseQuery(kpiQueries.kpiData());
+}

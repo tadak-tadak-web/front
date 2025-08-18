@@ -1,11 +1,8 @@
 import { useKpi } from "@/entities/kpi/hooks/useKpi";
 import KpiCard from "./KpiCard";
-import { LoadingSpinner } from "@/shared";
 
 export default function KpiRow() {
-  const { data, isLoading } = useKpi();
-
-  if (isLoading) return <LoadingSpinner />;
+  const { data } = useKpi();
 
   return (
     <div className="flex flex-nowrap gap-5 overflow-x-auto">

@@ -1,11 +1,8 @@
 import CourseCard from "./CourseCard";
 import { useCourse } from "@/entities/course/hooks/useCourse";
-import { LoadingSpinner } from "@/shared";
 
 export default function CourseRow() {
-  const { data, isLoading } = useCourse();
-
-  if (isLoading) return <LoadingSpinner />;
+  const { data } = useCourse();
 
   return (
     <div className="grid [grid-template-columns:repeat(auto-fit,minmax(320px,1fr))] gap-5 px-1 py-4">
