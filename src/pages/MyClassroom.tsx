@@ -1,6 +1,6 @@
-import { KpiRow, CourseRow } from "@/features/my-classroom/ui";
-import { LoadingSpinner } from "@/shared";
-import { Suspense } from "react";
+import { KpiRow, CourseRow } from '@/features/my-classroom/ui';
+import { LoadingSpinner } from '@/shared';
+import { Suspense } from 'react';
 
 export default function MyClassroom() {
   return (

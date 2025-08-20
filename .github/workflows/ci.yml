@@ -1,0 +1,29 @@
+name: CI-min
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push: { branches: [main, develop] }
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+          run_install: false
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Lint / Prettier / Typecheck
+        run: pnpm check

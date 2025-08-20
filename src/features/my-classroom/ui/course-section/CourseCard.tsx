@@ -1,4 +1,4 @@
-import type { Course } from "@/entities/course/types";
+import type { Course } from '@/entities/course/types';
 
 interface CourseCardProps {
   course: Course;
@@ -13,7 +13,7 @@ export default function CourseCard({ course }: CourseCardProps) {
     currentLecture,
     totalLecture,
     nextLectureTitle,
-    thumbnailUrl,
+    // thumbnailUrl,
   } = course;
 
   return (

@@ -21,10 +21,10 @@ export default function LoginForm() {
 
   return (
     <form className="flex flex-col w-full">
-      <IdInput onChange={(e) => setId(e.target.value)} value={id} />
+      <IdInput onChange={e => setId(e.target.value)} value={id} />
       <div className="mt-9" />
       <PasswordInput
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
         value={password}
       />
       <div className="flex justify-between items-center mt-8 mb-18">
