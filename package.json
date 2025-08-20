@@ -44,7 +44,7 @@
       "public"
     ]
   },
-  "packageManager": "pnpm@9",
+  "packageManager": "pnpm@10.15.0",
   "engines": {
     "node": ">=18.18"
   }
