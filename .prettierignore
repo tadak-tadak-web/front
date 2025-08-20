@@ -1,6 +1,0 @@
-node_modules
-dist
-coverage
-public/mockServiceWorker.js
-pnpm-lock.yaml
-*.map
