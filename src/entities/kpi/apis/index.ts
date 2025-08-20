@@ -1,1 +1,1 @@
-export * from "./getKpi";
+export * from './getKpi';

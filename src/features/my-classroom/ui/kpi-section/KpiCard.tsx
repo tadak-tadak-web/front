@@ -1,7 +1,7 @@
-import { Card } from "@/shared/ui/Card";
-import type { Kpi } from "@/entities/kpi/types";
-import { ICON_MAP } from "@/shared/constants/pages";
-import type { KpiIconMap } from "@/shared/constants/pages";
+import { Card } from '@/shared/ui/Card';
+import type { Kpi } from '@/entities/kpi/types';
+import { ICON_MAP } from '@/shared/constants/pages';
+import type { KpiIconMap } from '@/shared/constants/pages';
 
 interface KpiCardProps {
   kpi: Kpi;
@@ -24,7 +24,7 @@ export default function KpiCard({ kpi }: KpiCardProps) {
           {value}
         </strong>
         <span className="text-sm">
-          {isPositive ? "+" : "-"}
+          {isPositive ? '+' : '-'}
           {Math.abs(diff)} 지난 달 대비
         </span>
       </div>

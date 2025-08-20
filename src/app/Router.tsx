@@ -1,4 +1,4 @@
-import RequireAuth from "@/app/RequireAuth";
+import RequireAuth from '@/app/RequireAuth';
 import {
   LoginPage,
   RegisterPage,
@@ -9,11 +9,11 @@ import {
   Instructors,
   Achievements,
   Settings,
-} from "@/pages";
-import { LoadingSpinner } from "@/shared";
-import AppLayout from "@/widgets/AppLayout";
-import { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+} from '@/pages';
+import { LoadingSpinner } from '@/shared';
+import AppLayout from '@/widgets/AppLayout';
+import { Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default function Router() {
   return (
