@@ -1,3 +1,4 @@
+import type { LectureItem } from '@/entities/lecture';
 import {
   AssignmentsItem,
   MaterialsItem,
@@ -5,10 +6,10 @@ import {
 } from '@/features/lecture-detail';
 
 interface LectureItemListProps {
-  videos: string[];
-  assignments: string[];
-  materials: string[];
-} //각 아이템은 임시로 string[] type으로 설정
+  videos: LectureItem[];
+  assignments: LectureItem[];
+  materials: LectureItem[];
+}
 
 export default function LectureItemList({
   videos,
@@ -19,13 +20,20 @@ export default function LectureItemList({
     <footer className="mt-5 lg:mt-12">
       <ul className="flex flex-col gap-4">
         {videos.map((video, index) => (
-          <VideoItem key={`video-${index}`} title={video} isWatched />
+          <VideoItem
+            key={`video-${index}`}
+            title={video.title}
+            isWatched={video.completed}
+          />
         ))}
         {materials.map((material, index) => (
-          <MaterialsItem key={`material-${index}`} title={material} />
+          <MaterialsItem key={`material-${index}`} title={material.title} />
         ))}
         {assignments.map((assignment, index) => (
-          <AssignmentsItem key={`assignment-${index}`} title={assignment} />
+          <AssignmentsItem
+            key={`assignment-${index}`}
+            title={assignment.title}
+          />
         ))}
       </ul>
     </footer>

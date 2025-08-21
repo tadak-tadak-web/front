@@ -1,9 +1,18 @@
+import { lectureQueries } from '@/entities/lecture';
 import {
   LectureDetailInfoCard,
   LectureItemList,
 } from '@features/lecture-detail';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export default function WeeklyLectureSection() {
+  const { data: weeklyLecture } = useSuspenseQuery({
+    ...lectureQueries.lectureList(2),
+    select: (lectures) => lectures.find((l) => l.week === 2) ?? null,
+  });
+
+  if (!weeklyLecture) return null;
+
   return (
     <section className="w-full lg:w-4xl mt-16">
       <header className="py-6 px-7 bg-yellow-50 rounded-t-2xl">
@@ -12,14 +21,14 @@ export default function WeeklyLectureSection() {
       <section className="bg-white w-full lg:w-4xl px-6 py-8">
         <LectureDetailInfoCard
           title="운영체제를 공부해야하는 이유"
-          weekNumber={16}
-          progress={50}
-          resourceCounts={{ videos: 3, assignments: 1, materials: 2 }}
+          weekNumber={weeklyLecture.week}
+          progress={weeklyLecture.progress}
+          resourceCounts={{ ...weeklyLecture.stats }}
         />
         <LectureItemList
-          videos={['강의 1', '강의 2', '강의 3']}
-          assignments={['과제 1']}
-          materials={['자료 1', '자료 2']}
+          videos={weeklyLecture.itemsByType.videos}
+          assignments={weeklyLecture.itemsByType.assignments}
+          materials={weeklyLecture.itemsByType.materials}
         />
       </section>
     </section>

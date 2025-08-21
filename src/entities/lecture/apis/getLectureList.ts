@@ -1,5 +1,7 @@
+import type { Lecture } from '@/entities/lecture';
 import { api } from '@/shared';
 
-export const getLectureList = (id: number) => {
-  return api.get(`api/lecture/${id}`).json;
+export const getLectureList = async (id: number): Promise<Lecture[]> => {
+  const res = await api.get(`lecture/${id}`).json<{ data: Lecture[] }>();
+  return res.data;
 };
