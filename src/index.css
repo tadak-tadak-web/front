@@ -38,3 +38,9 @@
   --color-gray-500: #403e39;
   --color-gray-600: #121f1c;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}

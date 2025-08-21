@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 // lectures.mock.ts
 const LECTURE_MOCKS = [
   {
@@ -119,12 +119,12 @@ const LECTURE_MOCKS = [
   },
 ];
 
-export const kpiHandlers = [
-  http.get('/api/lecture/:id', ({ cookies }) => {
+export const lectureHandlers = [
+  http.get('/api/lecture/:id', async ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({ data: LECTURE_MOCKS });
     }
-
+    await delay(10000);
     return HttpResponse.json(
       {
         data: null,
