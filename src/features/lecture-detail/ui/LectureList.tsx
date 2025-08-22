@@ -1,14 +1,29 @@
 import { lectureQueries } from '@/entities/lecture';
+import { useRefMap } from '@/features/lecture-detail/hooks';
+import { useHashScroll } from '@/features/lecture-detail/hooks/useHashScroll';
 import { LectureDetailInfoCard } from '@/features/lecture-detail/ui/components';
 import LectureItemList from '@/features/lecture-detail/ui/LectureItemList';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 export default function LectureList() {
   const { data: lectureList } = useSuspenseQuery(lectureQueries.lectureList(2));
+  const { refMap, registerRef } = useRefMap();
+  useHashScroll(refMap, {
+    behavior: 'smooth',
+    block: 'start',
+  });
+
   return (
     <>
       {lectureList.map((lecture) => (
-        <section className="w-full lg:w-4xl mt-16" key={lecture.id}>
+        <section
+          className="w-full lg:w-4xl mt-16"
+          key={lecture.id}
+          id={`lecture-${lecture.id}`}
+          ref={(node) => {
+            registerRef(node, `lecture-${lecture.id}`);
+          }}
+        >
           <header className="py-6 px-7 bg-yellow-50 rounded-t-2xl">
             <h2 className="text-2xl">{lecture.title}</h2>
           </header>

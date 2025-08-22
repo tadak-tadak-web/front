@@ -1,6 +1,7 @@
 import {
   DetailHeader,
   LectureList,
+  LectureSidebarNav,
   WeeklyLectureSection,
 } from '@/features/lecture-detail';
 import { LectureNav } from '@/widgets';
@@ -14,6 +15,7 @@ export default function LectureDetail() {
         <WeeklyLectureSection />
         <LectureList />
       </section>
+      <LectureSidebarNav />
     </>
   );
 }
