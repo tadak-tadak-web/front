@@ -1,10 +1,13 @@
-import { lectureQueries } from '@/entities/lecture';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { type Lecture } from '@/entities/lecture';
+import { withLectureList } from '@/features/lecture-detail';
 import { Link } from 'react-router-dom';
 
-export default function LectureSidebarNav() {
-  const { data: lectureList } = useSuspenseQuery(lectureQueries.lectureList(2));
-
+interface LectureSidebarNavProps {
+  lectureList: Lecture[];
+}
+const WrappedLectureSidebarNav = withLectureList(function LectureSidebarNav({
+  lectureList,
+}: LectureSidebarNavProps) {
   return (
     <ul className="fixed top-1/2 right-10 -translate-y-1/2">
       {lectureList.map((lecture) => (
@@ -14,4 +17,6 @@ export default function LectureSidebarNav() {
       ))}
     </ul>
   );
-}
+});
+
+export default WrappedLectureSidebarNav;

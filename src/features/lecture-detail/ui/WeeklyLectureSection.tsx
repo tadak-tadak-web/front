@@ -1,20 +1,31 @@
-import { lectureQueries } from '@/entities/lecture';
+import { type Lecture } from '@/entities/lecture';
 import {
   LectureDetailInfoCard,
   LectureItemList,
+  withLectureList,
 } from '@features/lecture-detail';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
-export default function WeeklyLectureSection() {
-  const { data: weeklyLecture } = useSuspenseQuery({
-    ...lectureQueries.lectureList(2),
-    select: (lectures) => lectures.find((l) => l.week === 2) ?? null,
-  });
+interface WeeklyLectureSectionProps {
+  lectureList: Lecture[];
+  registerRef: (node: HTMLElement | null, id: string) => void;
+}
+
+withLectureList(function WeeklyLectureSection({
+  registerRef,
+  lectureList,
+}: WeeklyLectureSectionProps) {
+  const { id } = useParams();
+  const weeklyLecture =
+    lectureList.find((lecture) => lecture.week === Number(id)) ?? null;
 
   if (!weeklyLecture) return null;
 
   return (
-    <section className="w-full lg:w-4xl mt-16">
+    <section
+      className="w-full lg:w-4xl mt-16"
+      ref={(node) => registerRef(node, `weekly-lecture-${weeklyLecture.id}`)}
+    >
       <header className="py-6 px-7 bg-yellow-50 rounded-t-2xl">
         <h2 className="text-2xl">이번 주 강의</h2>
       </header>
@@ -33,4 +44,4 @@ export default function WeeklyLectureSection() {
       </section>
     </section>
   );
-}
+});

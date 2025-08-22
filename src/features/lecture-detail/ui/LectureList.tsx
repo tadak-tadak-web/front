@@ -1,18 +1,16 @@
-import { lectureQueries } from '@/entities/lecture';
-import { useRefMap } from '@/features/lecture-detail/hooks';
-import { useHashScroll } from '@/features/lecture-detail/hooks/useHashScroll';
+import { type Lecture } from '@/entities/lecture';
+import { withLectureList } from '@/features/lecture-detail/lib';
 import { LectureDetailInfoCard } from '@/features/lecture-detail/ui/components';
 import LectureItemList from '@/features/lecture-detail/ui/LectureItemList';
-import { useSuspenseQuery } from '@tanstack/react-query';
+interface LectureListProps {
+  registerRef: (node: HTMLElement | null, id: string) => void;
+  lectureList: Lecture[];
+}
 
-export default function LectureList() {
-  const { data: lectureList } = useSuspenseQuery(lectureQueries.lectureList(2));
-  const { refMap, registerRef } = useRefMap();
-  useHashScroll(refMap, {
-    behavior: 'smooth',
-    block: 'start',
-  });
-
+const WrappedLectureList = withLectureList(function LectureList({
+  registerRef,
+  lectureList,
+}: LectureListProps) {
   return (
     <>
       {lectureList.map((lecture) => (
@@ -44,4 +42,6 @@ export default function LectureList() {
       ))}
     </>
   );
-}
+});
+
+export default WrappedLectureList;
