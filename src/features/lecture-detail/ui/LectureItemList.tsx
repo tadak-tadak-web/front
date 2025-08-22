@@ -19,21 +19,18 @@ export default function LectureItemList({
   return (
     <footer className="mt-5 lg:mt-12">
       <ul className="flex flex-col gap-4">
-        {videos.map((video, index) => (
+        {videos.map(video => (
           <VideoItem
-            key={`video-${index}`}
+            key={video.id}
             title={video.title}
             isWatched={video.completed}
           />
         ))}
-        {materials.map((material, index) => (
-          <MaterialsItem key={`material-${index}`} title={material.title} />
+        {materials.map(material => (
+          <MaterialsItem key={material.id} title={material.title} />
         ))}
-        {assignments.map((assignment, index) => (
-          <AssignmentsItem
-            key={`assignment-${index}`}
-            title={assignment.title}
-          />
+        {assignments.map(assignment => (
+          <AssignmentsItem key={assignment.id} title={assignment.title} />
         ))}
       </ul>
     </footer>
