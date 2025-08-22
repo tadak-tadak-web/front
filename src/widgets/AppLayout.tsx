@@ -1,12 +1,12 @@
-import { Outlet, useLocation } from "react-router-dom";
-import { PAGES } from "@/shared/constants/pages";
-import Sidebar from "./Sidebar";
+import { Outlet, useLocation } from 'react-router-dom';
+import { PAGES } from '@/shared/constants/pages';
+import Sidebar from './Sidebar';
 
 export default function AppLayout() {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const currentPage = PAGES.find((page) => page.path === currentPath);
+  const currentPage = PAGES.find(page => page.path === currentPath);
   const title = currentPage?.label;
 
   return (

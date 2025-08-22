@@ -36,7 +36,7 @@ export default function PasswordInput({
         />
         <button
           type="button"
-          onClick={() => setVisible((v) => !v)}
+          onClick={() => setVisible(v => !v)}
           className="absolute right-3 top-1/2 -translate-y-1/2"
         >
           <img

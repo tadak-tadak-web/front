@@ -21,7 +21,7 @@ export default function TQProvider({
           retry: false,
         },
       },
-    })
+    }),
   );
   return (
     <QueryClientProvider client={queryClient}>
