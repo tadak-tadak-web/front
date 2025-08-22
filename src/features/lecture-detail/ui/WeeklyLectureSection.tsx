@@ -25,7 +25,7 @@ const WrappedWeeklyLectureSection = withLectureList(
     return (
       <section
         className="w-full lg:w-4xl mt-16"
-        ref={(node) => registerRef(node, `weekly-lecture-${weeklyLecture.id}`)}
+        ref={(node) => registerRef(node, `weekly-lecture`)}
       >
         <header className="py-6 px-7 bg-yellow-50 rounded-t-2xl">
           <h2 className="text-2xl">이번 주 강의</h2>
