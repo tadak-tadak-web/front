@@ -1,4 +1,5 @@
-import RequireAuth from '@/app/RequireAuth';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from '@/widgets/AppLayout';
 import {
   LoginPage,
   RegisterPage,
@@ -10,35 +11,58 @@ import {
   Achievements,
   Settings,
 } from '@/pages';
+import RequireAuth from '@/app/RequireAuth';
 import { LoadingSpinner } from '@/shared';
-import AppLayout from '@/widgets/AppLayout';
 import { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { lectureListLoader } from '@/entities/lecture';
+import { useQueryClient, type QueryClient } from '@tanstack/react-query';
 
+const createRouter = (queryClient: QueryClient) => {
+  return createBrowserRouter([
+    {
+      path: '/login',
+      element: <LoginPage />,
+    },
+    {
+      path: '/register',
+      element: <RegisterPage />,
+    },
+    {
+      element: <RequireAuth />,
+      children: [
+        {
+          element: <Layout />,
+          children: [
+            { path: '/', element: <MyClassroom /> },
+            { path: '/schedule', element: <Schedule /> },
+            { path: '/progress', element: <Progress /> },
+            { path: '/instructors', element: <Instructors /> },
+            { path: '/achievements', element: <Achievements /> },
+            { path: '/settings', element: <Settings /> },
+          ],
+        },
+        {
+          path: '/lecture/:id',
+          element: <LectureDetail />,
+          loader: ({ params }) =>
+            lectureListLoader({
+              id: Number(params.id),
+              queryClient,
+            }),
+        },
+      ],
+    },
+  ]);
+};
 export default function Router() {
+  const queryClient = useQueryClient();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route
-          element={
-            <Suspense fallback={<LoadingSpinner />}>
-              <RequireAuth />
-            </Suspense>
-          }
-        >
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<MyClassroom />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/progress" element={<Progress />} />
-            <Route path="/instructors" element={<Instructors />} />
-            <Route path="/achievements" element={<Achievements />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-          <Route path="/lecture/:id" element={<LectureDetail />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Suspense
+      fallback={
+        <LoadingSpinner className="fixed inset-0 flex justify-center items-center bg-white/60 z-50" />
+      }
+    >
+      <RouterProvider router={createRouter(queryClient)} />
+    </Suspense>
   );
 }
