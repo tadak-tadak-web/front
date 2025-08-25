@@ -1,12 +1,12 @@
-import { login, type LoginRequest } from '@/entities/user';
+import { postSignin, type SignInRequest } from '@/entities/user';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 export const useLogin = () => {
   const navigate = useNavigate();
-  const mutation = useMutation({ mutationFn: login });
+  const mutation = useMutation({ mutationFn: postSignin });
 
-  const handleMutate = ({ id, password }: LoginRequest) => {
+  const handleMutate = ({ id, password }: SignInRequest) => {
     mutation.mutate(
       { id, password },
       {
