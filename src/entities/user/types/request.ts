@@ -6,5 +6,4 @@ export interface PostLoginRequest {
 export interface PostRegisterRequest {
   id: string;
   password: string;
-  checkPassword: string;
 }
