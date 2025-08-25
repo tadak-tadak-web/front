@@ -8,6 +8,7 @@ export default function IdInput({ onChange, value }: InputProps) {
     <>
       <div className="relative w-full">
         <input
+          required
           type="text"
           id="id"
           value={value}

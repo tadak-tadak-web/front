@@ -4,24 +4,34 @@ import {
   PasswordInput,
   RegisterButton,
 } from '@/features/register';
-import { useRegister } from '@/features/register/model';
+import { useCheckId, useRegister } from '@/features/register/model';
 import { useState } from 'react';
 
 export default function RegisterForm() {
-  const { handleRegister, handleCheckId } = useRegister();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
 
+  const { onSubmit } = useRegister();
+  const { handleCheckId, data: checkIdData } = useCheckId();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit({ id, password });
+  };
+
   return (
-    <form className="flex flex-col">
+    <form className="flex flex-col" onSubmit={handleSubmit}>
       <div className="flex flex-col">
         <label htmlFor="id" className="text-xl">
           아이디
         </label>
         <div className="relative w-full">
           <IdInput onChange={e => setId(e.target.value)} value={id} />
-          <CheckDuplicateButton onClick={() => handleCheckId(id)} />
+          <CheckDuplicateButton
+            onClick={() => handleCheckId(id)}
+            isChecked={!!checkIdData?.status}
+          />
         </div>
       </div>
       <div className="mt-9" />
@@ -38,7 +48,7 @@ export default function RegisterForm() {
         value={checkPassword}
       />
       <div className="mt-15" />
-      <RegisterButton onClick={() => handleRegister({ id, password })} />
+      <RegisterButton onClick={() => onSubmit({ id, password })} />
     </form>
   );
 }

@@ -1,13 +1,14 @@
 import { http, HttpResponse } from 'msw';
 
-// 로그인 핸들러
+const MOCK_ID = 'john';
+const MOCK_PW = 'secret';
 export const authHandlers = [
   http.post<object, { id: string; password: string }>(
     '/api/login',
     async ({ request }) => {
       const { id, password } = await request.json();
 
-      if (id === 'john' && password === 'secret') {
+      if (id === MOCK_ID && password === MOCK_PW) {
         return HttpResponse.json(
           { message: 'Login successful' },
           {
@@ -43,7 +44,7 @@ export const authHandlers = [
     );
   }),
   http.post<object, { id: string; password: string; checkPassword: string }>(
-    '/api/signup',
+    '/api/user/register',
     async ({ request }) => {
       const { id, password, checkPassword } = await request.json();
 
@@ -62,6 +63,25 @@ export const authHandlers = [
         { message: 'Invalid credentials' },
         { status: 401 },
       );
+    },
+  ),
+  http.post<object, { id: string }>(
+    '/api/user/check-id',
+    async ({ request }) => {
+      const { id } = await request.json();
+
+      if (id !== MOCK_ID) {
+        return HttpResponse.json(
+          { status: true },
+          {
+            headers: {
+              'set-cookie': 'sessionId=abc123; Path=/api;',
+            },
+          },
+        );
+      }
+
+      return HttpResponse.json({ status: false }, { status: 200 });
     },
   ),
 ];

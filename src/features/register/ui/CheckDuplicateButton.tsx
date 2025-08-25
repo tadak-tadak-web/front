@@ -1,16 +1,25 @@
+import clsx from 'clsx';
+
 interface CheckDuplicateButtonProps {
+  isChecked: boolean;
   onClick: () => void;
 }
 export default function CheckDuplicateButton({
   onClick,
+  isChecked,
 }: CheckDuplicateButtonProps) {
   return (
     <button
       type="button"
-      className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#FF7F50] text-black text-xs px-3.5 py-1.5 rounded-[8px]"
+      className={clsx(
+        'absolute right-2 top-1/2 -translate-y-1/2 bg-[#FF7F50] text-xs px-3.5 py-1.5 rounded-[8px] cursor-pointer text-white',
+        {
+          'bg-green-500': isChecked,
+        },
+      )}
       onClick={onClick}
     >
-      중복 확인
+      {isChecked ? '확인 완료!' : '중복 확인'}
     </button>
   );
 }
