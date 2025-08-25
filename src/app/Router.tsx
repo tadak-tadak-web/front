@@ -16,6 +16,7 @@ import { LoadingSpinner } from '@/shared';
 import { Suspense } from 'react';
 import { lectureListLoader } from '@/entities/lecture';
 import { useQueryClient, type QueryClient } from '@tanstack/react-query';
+import { userLoader } from '@/entities/user/lib';
 
 const createRouter = (queryClient: QueryClient) => {
   return createBrowserRouter([
@@ -29,6 +30,7 @@ const createRouter = (queryClient: QueryClient) => {
     },
     {
       element: <RequireAuth />,
+      loader: () => userLoader(queryClient),
       children: [
         {
           element: <Layout />,
