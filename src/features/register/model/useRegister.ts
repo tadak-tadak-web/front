@@ -1,12 +1,17 @@
 import { postRegister, type PostRegisterRequest } from '@/entities/user';
+import { postCheckId } from '@/entities/user/apis/postCheckId';
 import { useMutation } from '@tanstack/react-query';
 
 export const useRegister = () => {
-  const mutation = useMutation({ mutationFn: postRegister });
+  const registerMutation = useMutation({ mutationFn: postRegister });
+  const checkIdMutation = useMutation({ mutationFn: postCheckId });
 
-  const handleMutate = ({ id, password }: PostRegisterRequest) => {
-    mutation.mutate({ id, password });
+  const handleCheckId = (id: string) => {
+    checkIdMutation.mutate(id);
+  };
+  const handleRegister = ({ id, password }: PostRegisterRequest) => {
+    registerMutation.mutate({ id, password });
   };
 
-  return { handleMutate, ...mutation };
+  return { handleRegister, registerMutation, handleCheckId, checkIdMutation };
 };

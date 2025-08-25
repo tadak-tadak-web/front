@@ -1,16 +1,29 @@
-import { IdInput, PasswordInput, RegisterButton } from '@/features/register';
+import {
+  CheckDuplicateButton,
+  IdInput,
+  PasswordInput,
+  RegisterButton,
+} from '@/features/register';
 import { useRegister } from '@/features/register/model';
 import { useState } from 'react';
 
 export default function RegisterForm() {
-  const { handleMutate } = useRegister();
+  const { handleRegister, handleCheckId } = useRegister();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
 
   return (
     <form className="flex flex-col">
-      <IdInput onChange={e => setId(e.target.value)} value={id} />
+      <div className="flex flex-col">
+        <label htmlFor="id" className="text-xl">
+          아이디
+        </label>
+        <div className="relative w-full">
+          <IdInput onChange={e => setId(e.target.value)} value={id} />
+          <CheckDuplicateButton onClick={() => handleCheckId(id)} />
+        </div>
+      </div>
       <div className="mt-9" />
       <PasswordInput
         label="비밀번호"
@@ -25,7 +38,7 @@ export default function RegisterForm() {
         value={checkPassword}
       />
       <div className="mt-15" />
-      <RegisterButton onClick={() => handleMutate({ id, password })} />
+      <RegisterButton onClick={() => handleRegister({ id, password })} />
     </form>
   );
 }
