@@ -1,9 +1,9 @@
-export interface SignInRequest {
+export interface PostLoginRequest {
   id: string;
   password: string;
 }
 
-export interface SignupRequest {
+export interface PostRegisterRequest {
   id: string;
   password: string;
   checkPassword: string;
