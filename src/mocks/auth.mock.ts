@@ -42,4 +42,26 @@ export const authHandlers = [
       { status: 200 },
     );
   }),
+  http.post<object, { id: string; password: string; checkPassword: string }>(
+    '/api/signup',
+    async ({ request }) => {
+      const { id, password, checkPassword } = await request.json();
+
+      if (id && password && checkPassword === password) {
+        return HttpResponse.json(
+          { message: 'Signup successful' },
+          {
+            headers: {
+              'set-cookie': 'sessionId=abc123; Path=/api;',
+            },
+          },
+        );
+      }
+
+      return HttpResponse.json(
+        { message: 'Invalid credentials' },
+        { status: 401 },
+      );
+    },
+  ),
 ];
