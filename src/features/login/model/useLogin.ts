@@ -12,12 +12,9 @@ export const useLogin = () => {
       {
         onSuccess: data => {
           navigate('/');
-          console.log('Login successful:', data);
         },
-        onError: error => {
-          console.error('Login failed:', error);
-        },
-      },
+        onError: error => {},
+      }
     );
   };
   return { ...mutation, handleMutate };
