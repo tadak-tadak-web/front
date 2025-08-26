@@ -4,6 +4,7 @@ import {
   PasswordInput,
 } from '@/features/register';
 import { useCheckId, useRegister } from '@/features/register/model';
+import PasswordMatchMessage from './PasswordMatchMessage';
 import { useState } from 'react';
 
 export default function RegisterForm() {
@@ -51,9 +52,7 @@ export default function RegisterForm() {
         onChange={e => setCheckPassword(e.target.value)}
         value={checkPassword}
       />
-      <span>
-        {checkPassword === password ? '일치합니다' : '일치하지 않습니다'}
-      </span>
+      <PasswordMatchMessage password={password} checkPassword={checkPassword} />
       <div className="mt-15" />
       <button
         type="submit"

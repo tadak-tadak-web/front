@@ -29,7 +29,7 @@ export default function PasswordInput({
         <input
           required
           type={visible ? 'text' : 'password'}
-          id="password"
+          autoComplete="new-password"
           className="w-full border border-[#BEB8B8] rounded-[10px] focus:outline-none p-3.5 pr-12"
           placeholder="비밀번호를 입력하세요"
           onChange={onChange}

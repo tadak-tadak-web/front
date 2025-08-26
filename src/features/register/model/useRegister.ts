@@ -25,5 +25,5 @@ export const useRegister = () => {
     );
   };
 
-  return { register, mutation };
+  return { register, ...mutation };
 };

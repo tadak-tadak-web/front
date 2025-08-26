@@ -10,6 +10,7 @@ export default function IdInput({ onChange, value }: InputProps) {
         <input
           required
           type="text"
+          autoComplete="username"
           id="id"
           value={value}
           onChange={onChange}
