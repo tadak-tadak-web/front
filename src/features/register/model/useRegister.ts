@@ -1,8 +1,10 @@
 import { type PostRegisterRequest, postRegister } from '@/entities/user';
 import { validatePassword } from '@/features/register/lib';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 export const useRegister = () => {
+  const navigate = useNavigate();
   const mutation = useMutation({ mutationFn: postRegister });
 
   const onSubmit = ({ id, password }: PostRegisterRequest) => {
@@ -12,7 +14,17 @@ export const useRegister = () => {
       return;
     }
 
-    mutation.mutate({ id, password });
+    mutation.mutate(
+      { id, password },
+      {
+        onSuccess(data) {
+          if (data.message === 'Signup successful') {
+            navigate('/');
+          }
+        },
+      }
+    );
   };
+
   return { onSubmit, mutation };
 };

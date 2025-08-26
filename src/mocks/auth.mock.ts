@@ -26,7 +26,6 @@ export const authHandlers = [
     }
   ),
 
-  // 로그인된 유저 정보 요청
   http.get('/api/user', ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({
