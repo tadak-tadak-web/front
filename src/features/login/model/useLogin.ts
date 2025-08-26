@@ -10,10 +10,9 @@ export const useLogin = () => {
     mutation.mutate(
       { id, password },
       {
-        onSuccess: data => {
+        onSuccess: () => {
           navigate('/');
         },
-        onError: error => {},
       }
     );
   };
