@@ -23,7 +23,7 @@ export default function PasswordInput({
         <label htmlFor="password" className="text-xl">
           {label}
         </label>
-        <span className="text-[#FF0000] text-xs">{hint}</span>
+        <span className="text-[#FF0000] text-xs ml-1">{hint}</span>
       </div>
       <div className="relative">
         <input
