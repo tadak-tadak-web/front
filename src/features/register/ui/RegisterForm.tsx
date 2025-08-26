@@ -1,7 +1,6 @@
 import {
   CheckDuplicateButton,
   PasswordInput,
-  IdInput,
   PasswordMatchMessage,
   useCheckId,
   useRegister,
@@ -33,7 +32,18 @@ export default function RegisterForm() {
           아이디
         </label>
         <div className="relative w-full">
-          <IdInput onChange={e => setId(e.target.value)} value={id} />
+          <div className="relative w-full">
+            <input
+              required
+              type="text"
+              disabled={checkIdData?.status}
+              autoComplete="username"
+              id="id"
+              value={id}
+              onChange={e => setId(e.target.value)}
+              className="border w-full  border-[#BEB8B8] rounded-[10px] focus:outline-none p-3.5"
+            />
+          </div>
           <CheckDuplicateButton
             onClick={() => checkId(id)}
             isChecked={!!checkIdData?.status}
