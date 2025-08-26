@@ -13,7 +13,7 @@ export default function RegisterForm() {
   const [checkPassword, setCheckPassword] = useState('');
 
   const { register } = useRegister();
-  const { mutate, data: checkIdData } = useCheckId();
+  const { checkId, data: checkIdData } = useCheckId();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ export default function RegisterForm() {
         <div className="relative w-full">
           <IdInput onChange={e => setId(e.target.value)} value={id} />
           <CheckDuplicateButton
-            onClick={() => mutate(id)}
+            onClick={() => checkId(id)}
             isChecked={!!checkIdData?.status}
           />
         </div>
