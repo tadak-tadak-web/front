@@ -14,6 +14,7 @@ export default function LectureDetail() {
     behavior: 'smooth',
     block: 'start',
   });
+
   return (
     <>
       <DetailHeader />

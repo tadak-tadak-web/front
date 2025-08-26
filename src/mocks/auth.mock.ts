@@ -15,15 +15,15 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          },
+          }
         );
       }
 
       return HttpResponse.json(
         { message: 'Invalid credentials' },
-        { status: 401 },
+        { status: 401 }
       );
-    },
+    }
   ),
 
   // 로그인된 유저 정보 요청
@@ -40,30 +40,30 @@ export const authHandlers = [
 
     return HttpResponse.json(
       { data: null, message: 'Unauthorized' },
-      { status: 200 },
+      { status: 200 }
     );
   }),
-  http.post<object, { id: string; password: string; checkPassword: string }>(
+  http.post<object, { id: string; password: string }>(
     '/api/user/register',
     async ({ request }) => {
-      const { id, password, checkPassword } = await request.json();
+      const { id, password } = await request.json();
 
-      if (id && password && checkPassword === password) {
+      if (id && password) {
         return HttpResponse.json(
           { message: 'Signup successful' },
           {
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          },
+          }
         );
       }
 
       return HttpResponse.json(
         { message: 'Invalid credentials' },
-        { status: 401 },
+        { status: 401 }
       );
-    },
+    }
   ),
   http.post<object, { id: string }>(
     '/api/user/check-id',
@@ -77,11 +77,11 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          },
+          }
         );
       }
 
       return HttpResponse.json({ status: false }, { status: 200 });
-    },
+    }
   ),
 ];

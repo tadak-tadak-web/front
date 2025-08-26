@@ -47,6 +47,9 @@ export default function RegisterForm() {
         onChange={e => setCheckPassword(e.target.value)}
         value={checkPassword}
       />
+      <span>
+        {checkPassword === password ? '일치합니다' : '일치하지 않습니다'}
+      </span>
       <div className="mt-15" />
       <RegisterButton onClick={() => onSubmit({ id, password })} />
     </form>
