@@ -2,7 +2,6 @@ import {
   CheckDuplicateButton,
   IdInput,
   PasswordInput,
-  RegisterButton,
 } from '@/features/register';
 import { useCheckId, useRegister } from '@/features/register/model';
 import { useState } from 'react';
@@ -12,12 +11,17 @@ export default function RegisterForm() {
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
 
-  const { onSubmit } = useRegister();
-  const { handleCheckId, data: checkIdData } = useCheckId();
+  const { register } = useRegister();
+  const { mutate, data: checkIdData } = useCheckId();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit({ id, password });
+    if (!checkIdData?.status) {
+      alert('중복 확인을 진행해주세요');
+      return;
+    }
+
+    register({ id, password });
   };
 
   return (
@@ -29,7 +33,7 @@ export default function RegisterForm() {
         <div className="relative w-full">
           <IdInput onChange={e => setId(e.target.value)} value={id} />
           <CheckDuplicateButton
-            onClick={() => handleCheckId(id)}
+            onClick={() => mutate(id)}
             isChecked={!!checkIdData?.status}
           />
         </div>
@@ -51,7 +55,12 @@ export default function RegisterForm() {
         {checkPassword === password ? '일치합니다' : '일치하지 않습니다'}
       </span>
       <div className="mt-15" />
-      <RegisterButton onClick={() => onSubmit({ id, password })} />
+      <button
+        type="submit"
+        className="shadow-2xl w-full h-[55px] bg-gradient-to-r from-[#D2886F] to-[#D4B896] text-white font-bold py-2 px-4 rounded-[10px] cursor-pointer"
+      >
+        회원가입
+      </button>
     </form>
   );
 }

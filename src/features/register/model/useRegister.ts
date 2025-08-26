@@ -7,9 +7,8 @@ export const useRegister = () => {
   const navigate = useNavigate();
   const mutation = useMutation({ mutationFn: postRegister });
 
-  const onSubmit = ({ id, password }: PostRegisterRequest) => {
-    const validation = validatePassword(password);
-    if (!validation) {
+  const register = ({ id, password }: PostRegisterRequest) => {
+    if (!validatePassword(password)) {
       alert('비밀번호는 영문자와 숫자를 포함한 8~20자리여야 합니다.');
       return;
     }
@@ -26,5 +25,5 @@ export const useRegister = () => {
     );
   };
 
-  return { onSubmit, mutation };
+  return { register, mutation };
 };

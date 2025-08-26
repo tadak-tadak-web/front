@@ -27,6 +27,7 @@ export default function PasswordInput({
       </div>
       <div className="relative">
         <input
+          required
           type={visible ? 'text' : 'password'}
           id="password"
           className="w-full border border-[#BEB8B8] rounded-[10px] focus:outline-none p-3.5 pr-12"

@@ -6,7 +6,5 @@ export function useCheckId() {
     mutationFn: postCheckId,
   });
 
-  const handleCheckId = (id: string) => mutation.mutate(id);
-
-  return { handleCheckId, ...mutation };
+  return { ...mutation };
 }
