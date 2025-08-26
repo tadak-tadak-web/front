@@ -1,10 +1,11 @@
 import {
   CheckDuplicateButton,
-  IdInput,
   PasswordInput,
-} from '@/features/register';
-import { useCheckId, useRegister } from '@/features/register/model';
-import PasswordMatchMessage from './PasswordMatchMessage';
+  IdInput,
+  PasswordMatchMessage,
+  useCheckId,
+  useRegister,
+} from '@features/register';
 import { useState } from 'react';
 
 export default function RegisterForm() {

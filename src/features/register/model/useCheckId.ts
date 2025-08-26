@@ -6,6 +6,7 @@ export function useCheckId() {
   const mutation = useMutation({
     mutationFn: postCheckId,
   });
+
   const checkId = (id: string) => {
     if (!validateId(id)) return;
     mutation.mutate(id, {
