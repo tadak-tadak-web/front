@@ -23,12 +23,13 @@ export default function PasswordInput({
         <label htmlFor="password" className="text-xl">
           {label}
         </label>
-        <span className="text-[#FF0000] text-xs">{hint}</span>
+        <span className="text-[#FF0000] text-xs ml-1">{hint}</span>
       </div>
       <div className="relative">
         <input
+          required
           type={visible ? 'text' : 'password'}
-          id="password"
+          autoComplete="new-password"
           className="w-full border border-[#BEB8B8] rounded-[10px] focus:outline-none p-3.5 pr-12"
           placeholder="비밀번호를 입력하세요"
           onChange={onChange}
