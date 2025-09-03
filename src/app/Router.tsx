@@ -10,6 +10,7 @@ import {
   Instructors,
   Achievements,
   Settings,
+  Assignment,
 } from '@/pages';
 import RequireAuth from '@/app/RequireAuth';
 import { LoadingSpinner } from '@/shared';
@@ -52,10 +53,15 @@ const createRouter = (queryClient: QueryClient) => {
               queryClient,
             }),
         },
+        {
+          path: '/lecture/:id/assignments/:assignmentsId',
+          element: <Assignment />,
+        },
       ],
     },
   ]);
 };
+
 export default function Router() {
   const queryClient = useQueryClient();
   return (
