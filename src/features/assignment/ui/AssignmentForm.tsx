@@ -34,8 +34,8 @@ export default function AssignmentForm() {
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
         <button
           type="button"
-          className="justify-center py-2 px-4 text-white border-blue-800 border-b-4 shadow-sky-950 shadow- text-sm font-medium rounded-md  bg-blue-700
-                           hover:bg-blue-300 focus:outline-none hover:border-blue-300 mb-4 md:mb-0"
+          className="justify-center py-2 px-4 text-white border-blue-300 border-b-4 shadow-sky-950 shadow- text-sm font-medium rounded-md  bg-primary-blue
+                           hover:bg-secondary-blue  focus:outline-none hover:border-secondary-blue mb-4 md:mb-0"
         >
           다운로드
         </button>

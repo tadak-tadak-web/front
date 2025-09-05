@@ -7,10 +7,10 @@ export default function AssignmentHeader() {
       >
         웹 프론트엔드 기초
       </h1>
-      <div className="flex items-center text-gray-600 text-sm">
+      <div className="flex items-center text-black text-sm">
         <span className="mr-2">N주차 과제</span>
         <span
-          className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold"
+          className="px-2 py-0.5 bg-blue-100 text-gray-50 rounded-full text-xs font-semibold"
           aria-label="제출 완료"
         >
           제출완료
