@@ -33,7 +33,7 @@ export default function LectureItemList({
           <AssignmentsItem
             key={assignment.id}
             title={assignment.title}
-            assignmentsId={assignment.id}
+            assignmentId={assignment.id}
           />
         ))}
       </ul>
