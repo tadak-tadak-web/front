@@ -1,7 +1,6 @@
 export default function AssignmentHeader() {
   return (
-    <header className="p-6 md:p-8 border-b">
-      <p className="text-gray-500 text-sm font-medium">과제제출</p>
+    <header className="p-6 md:p-8">
       <h1
         id="page-title"
         className="text-2xl font-bold text-gray-800 mt-4 mb-2"
@@ -17,8 +16,6 @@ export default function AssignmentHeader() {
           제출완료
         </span>
       </div>
-      <p className="text-gray-500 text-sm mt-2">...</p>{' '}
-      {/* 추가 정보 (예: 마감일 등) */}
     </header>
   );
 }
