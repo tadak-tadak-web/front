@@ -30,7 +30,11 @@ export default function LectureItemList({
           <MaterialsItem key={material.id} title={material.title} />
         ))}
         {assignments.map(assignment => (
-          <AssignmentsItem key={assignment.id} title={assignment.title} />
+          <AssignmentsItem
+            key={assignment.id}
+            title={assignment.title}
+            assignmentId={assignment.id}
+          />
         ))}
       </ul>
     </footer>

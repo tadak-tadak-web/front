@@ -1,7 +1,7 @@
 export type LectureItemType = 'video' | 'material' | 'assignment';
 
 export interface LectureItem {
-  id: string;
+  id: number;
   type: LectureItemType;
   title: string;
   completed: boolean;
