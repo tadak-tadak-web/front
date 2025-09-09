@@ -24,8 +24,13 @@ let ASSIGNMENT_MOCKS = [
 ];
 
 export const assignmentHandler = [
-  http.get('/api/assignment/:assignmentId', () => {
-    return HttpResponse.json({ data: ASSIGNMENT_MOCKS });
+  http.get('/api/assignment/:assignmentId', ({ params }) => {
+    const { assignmentId } = params;
+    if (assignmentId === 'l2-a1') {
+      return HttpResponse.json({ data: ASSIGNMENT_MOCKS });
+    }
+
+    return HttpResponse.json({ data: null });
   }),
   http.post('/api/assignment', async ({ request }) => {
     const formData = await request.formData();

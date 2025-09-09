@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 // lectures.mock.ts
-const LECTURE_MOCKS = [
+export const LECTURE_MOCKS = [
   {
     id: 1,
     week: 1,
@@ -9,11 +9,11 @@ const LECTURE_MOCKS = [
     progress: 100,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: true },
-        { id: 'v2', title: '강의 2', completed: true },
+        { id: 'l1-v1', title: '강의 1', completed: true },
+        { id: 'l1-v2', title: '강의 2', completed: true },
       ],
-      materials: [{ id: 'm1', title: '자료 1', completed: true }],
-      assignments: [{ id: 'a1', title: '과제 1', completed: true }],
+      materials: [{ id: 'l1-m1', title: '자료 1', completed: true }],
+      assignments: [{ id: 'l1-a1', title: '과제 1', completed: true }],
     },
     stats: { videos: 2, assignments: 1, materials: 1 },
   },
@@ -25,12 +25,12 @@ const LECTURE_MOCKS = [
     progress: 80,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: true },
-        { id: 'v2', title: '강의 2', completed: true },
-        { id: 'v3', title: '강의 3', completed: false },
+        { id: 'l2-v1', title: '강의 1', completed: true },
+        { id: 'l2-v2', title: '강의 2', completed: true },
+        { id: 'l2-v3', title: '강의 3', completed: false },
       ],
-      materials: [{ id: 'm1', title: '자료 1', completed: false }],
-      assignments: [{ id: 'a1', title: '과제 1', completed: false }],
+      materials: [{ id: 'l2-m1', title: '자료 1', completed: false }],
+      assignments: [{ id: 'l2-a1', title: '과제 1', completed: false }],
     },
     stats: { videos: 3, assignments: 1, materials: 1 },
   },
@@ -42,14 +42,14 @@ const LECTURE_MOCKS = [
     progress: 60,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: true },
-        { id: 'v2', title: '강의 2', completed: false },
+        { id: 'l3-v1', title: '강의 1', completed: true },
+        { id: 'l3-v2', title: '강의 2', completed: false },
       ],
       materials: [
-        { id: 'm1', title: '자료 1', completed: true },
-        { id: 'm2', title: '자료 2', completed: false },
+        { id: 'l3-m1', title: '자료 1', completed: true },
+        { id: 'l3-m2', title: '자료 2', completed: false },
       ],
-      assignments: [{ id: 'a1', title: '과제 1', completed: false }],
+      assignments: [{ id: 'l3-a1', title: '과제 1', completed: false }],
     },
     stats: { videos: 2, assignments: 1, materials: 2 },
   },
@@ -61,12 +61,12 @@ const LECTURE_MOCKS = [
     progress: 40,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: true },
-        { id: 'v2', title: '강의 2', completed: false },
-        { id: 'v3', title: '강의 3', completed: false },
+        { id: 'l4-v1', title: '강의 1', completed: true },
+        { id: 'l4-v2', title: '강의 2', completed: false },
+        { id: 'l4-v3', title: '강의 3', completed: false },
       ],
       materials: [],
-      assignments: [{ id: 'a1', title: '과제 1', completed: false }],
+      assignments: [{ id: 'l4-a1', title: '과제 1', completed: false }],
     },
     stats: { videos: 3, assignments: 1, materials: 0 },
   },
@@ -78,10 +78,10 @@ const LECTURE_MOCKS = [
     progress: 20,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: true },
-        { id: 'v2', title: '강의 2', completed: false },
+        { id: 'l5-v1', title: '강의 1', completed: true },
+        { id: 'l5-v2', title: '강의 2', completed: false },
       ],
-      materials: [{ id: 'm1', title: '자료 1', completed: false }],
+      materials: [{ id: 'l5-m1', title: '자료 1', completed: false }],
       assignments: [],
     },
     stats: { videos: 2, assignments: 0, materials: 1 },
@@ -94,12 +94,12 @@ const LECTURE_MOCKS = [
     progress: 0,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: false },
-        { id: 'v2', title: '강의 2', completed: false },
-        { id: 'v3', title: '강의 3', completed: false },
+        { id: 'l6-v1', title: '강의 1', completed: false },
+        { id: 'l6-v2', title: '강의 2', completed: false },
+        { id: 'l6-v3', title: '강의 3', completed: false },
       ],
-      materials: [{ id: 'm1', title: '자료 1', completed: false }],
-      assignments: [{ id: 'a1', title: '과제 1', completed: false }],
+      materials: [{ id: 'l6-m1', title: '자료 1', completed: false }],
+      assignments: [{ id: 'l6-a1', title: '과제 1', completed: false }],
     },
     stats: { videos: 3, assignments: 1, materials: 1 },
   },
@@ -111,11 +111,11 @@ const LECTURE_MOCKS = [
     progress: 0,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: false },
-        { id: 'v2', title: '강의 2', completed: false },
+        { id: 'l7-v1', title: '강의 1', completed: false },
+        { id: 'l7-v2', title: '강의 2', completed: false },
       ],
-      materials: [{ id: 'm1', title: '자료 1', completed: false }],
-      assignments: [{ id: 'a1', title: '과제 1', completed: false }],
+      materials: [{ id: 'l7-m1', title: '자료 1', completed: false }],
+      assignments: [{ id: 'l7-a1', title: '과제 1', completed: false }],
     },
     stats: { videos: 2, assignments: 1, materials: 1 },
   },
@@ -127,20 +127,19 @@ const LECTURE_MOCKS = [
     progress: 0,
     itemsByType: {
       videos: [
-        { id: 'v1', title: '강의 1', completed: false },
-        { id: 'v2', title: '강의 2', completed: false },
-        { id: 'v3', title: '강의 3', completed: false },
+        { id: 'l8-v1', title: '강의 1', completed: false },
+        { id: 'l8-v2', title: '강의 2', completed: false },
+        { id: 'l8-v3', title: '강의 3', completed: false },
       ],
       materials: [
-        { id: 'm1', title: '자료 1', completed: false },
-        { id: 'm2', title: '자료 2', completed: false },
+        { id: 'l8-m1', title: '자료 1', completed: false },
+        { id: 'l8-m2', title: '자료 2', completed: false },
       ],
-      assignments: [{ id: 'a1', title: '과제 1', completed: false }],
+      assignments: [{ id: 'l8-a1', title: '과제 1', completed: false }],
     },
     stats: { videos: 3, assignments: 1, materials: 2 },
   },
 ];
-
 export const lectureHandlers = [
   http.get('/api/lecture/:id', async ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
