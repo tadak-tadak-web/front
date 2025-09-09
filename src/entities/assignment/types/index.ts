@@ -1,1 +1,1 @@
-export * from './assignment';
+export * from './assignmentFile';

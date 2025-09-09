@@ -1,6 +1,6 @@
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
 
-export default function AssignmentForm() {
+export default function FileSubmitForm() {
   return (
     <form>
       <div className="mb-6">

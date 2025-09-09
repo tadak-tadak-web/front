@@ -54,7 +54,7 @@ const createRouter = (queryClient: QueryClient) => {
             }),
         },
         {
-          path: '/lecture/:id/assignments/:assignmentsId',
+          path: '/lecture/:id/assignments/:assignmentId',
           element: <Assignment />,
         },
       ],
