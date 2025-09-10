@@ -1,5 +1,5 @@
 import { assignmentQueries } from '@/entities/assignment';
-import { FileSubmitForm, FileList } from '@/features/assignment';
+import { FileSubmitForm, FileList, AddFileButton } from '@/features/assignment';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
@@ -16,6 +16,28 @@ export default function AssignmentContainer() {
         과제 제출
       </h2>
       {data ? <FileList assignmentsFileList={data} /> : <FileSubmitForm />}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
+        <AddFileButton
+          onFilesSelected={file => {
+            console.log(file);
+          }}
+        />
+        <div className="flex items-center">
+          <label
+            htmlFor="score"
+            className="block text-sm font-medium text-gray-700 mr-2"
+          >
+            점수
+          </label>
+          <input
+            type="text"
+            name="score"
+            id="score"
+            readOnly
+            className="block w-20 rounded-md border-gray-300 shadow-sm sm:text-sm p-2"
+          />
+        </div>
+      </div>
     </section>
   );
 }

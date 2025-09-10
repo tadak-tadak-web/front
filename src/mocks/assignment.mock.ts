@@ -32,26 +32,16 @@ export const assignmentHandler = [
 
     return HttpResponse.json({ data: null });
   }),
-  http.post('/api/assignment', async ({ request }) => {
-    const formData = await request.formData();
-    const file = formData.get('file');
-    if (!file || !(file instanceof File)) {
-      return HttpResponse.json(
-        { message: '제목과 파일이 필요합니다.' },
-        { status: 400 }
-      );
-    }
-
+  http.post('/api/assignment', () => {
+    // 1. 이 로그가 브라우저 콘솔에 찍히는지 확인합니다.
     const newAssignment = {
       id: `a${Date.now()}`,
-      fileName: file.name,
-      fileContent: `(업로드된 파일: ${file.name}, 크기: ${file.size} bytes)`,
-      fileSize: file.size,
+      fileName: 'upload-success.png', // 임의의 파일 이름
+      fileSize: 12345, // 임의의 파일 크기
     };
 
-    ASSIGNMENT_MOCKS.unshift(newAssignment);
-
-    return HttpResponse.json(newAssignment, { status: 201 });
+    // 프론트엔드가 기대하는 { data: ... } 형식으로 성공 응답을 반환합니다.
+    return HttpResponse.json({ data: newAssignment }, { status: 201 });
   }),
   http.delete('/api/assignment/:assignmentId', ({ params }) => {
     const { assignmentId } = params;
