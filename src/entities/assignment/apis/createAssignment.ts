@@ -1,4 +1,4 @@
-import type { Assignment } from '@/entities/assignment';
+import type { AssignmentFile } from '@/entities/assignment';
 import { api } from '@/shared';
 
 export const createAssignment = async (file: File) => {
@@ -9,6 +9,6 @@ export const createAssignment = async (file: File) => {
         'Content-Type': file.type,
       },
     })
-    .json<{ data: Assignment }>();
+    .json<{ data: AssignmentFile }>();
   return response.data;
 };

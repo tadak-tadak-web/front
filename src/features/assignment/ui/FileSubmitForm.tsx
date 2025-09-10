@@ -1,6 +1,53 @@
+import { createAssignment } from '@/entities/assignment';
+import { AddFileButton } from '@/features/assignment';
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
-
+import { useMutation } from '@tanstack/react-query';
+import clsx from 'clsx';
+import { useState } from 'react';
+const preventDefaults = (
+  callback: (e: React.DragEvent<HTMLDivElement>) => void
+) => {
+  return (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    callback(e);
+  };
+};
 export default function FileSubmitForm() {
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const { mutate } = useMutation({
+    mutationFn: createAssignment,
+    onSuccess: data => {
+      console.log('업로드 성공:', data);
+    },
+    onError: error => {
+      console.error('업로드 실패:', error);
+      alert('파일 업로드에 실패했습니다.');
+    },
+  });
+
+  const handleDragEnter = preventDefaults(() => {
+    setIsDragging(true);
+  });
+
+  const handleDragLeave = preventDefaults(() => {
+    setIsDragging(false);
+  });
+
+  const handleDragOver = preventDefaults(() => {
+    if (!isDragging) {
+      setIsDragging(true);
+    }
+  });
+
+  const handleDrop = preventDefaults(e => {
+    setIsDragging(false);
+    for (const file of e.dataTransfer.files) {
+      mutate(file);
+    }
+    console.log(e.dataTransfer.files);
+  });
+
   return (
     <form>
       <div className="mb-6">
@@ -8,8 +55,15 @@ export default function FileSubmitForm() {
           파일 업로드
         </label>
         <div
-          className="mt-1 flex justify-center items-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md
-                           hover:border-blue-400 transition-colors duration-200 cursor-pointer relative"
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          className={clsx(
+            `mt-1 flex justify-center items-center px-6 pt-5 pb-6 border-2  border-dashed rounded-md
+                          cursor-pointer relative`,
+            isDragging ? 'border-blue-200 bg-blue-50' : 'border-gray-300 '
+          )}
         >
           <input
             id="file-upload"
@@ -22,7 +76,7 @@ export default function FileSubmitForm() {
             <div className="flex text-sm text-gray-600">
               <label
                 htmlFor="file-upload"
-                className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none  focus-within:ring-blue-500"
+                className="relative  font-medium text-blue-600"
               >
                 <span>파일 선택</span>
               </label>
@@ -32,13 +86,11 @@ export default function FileSubmitForm() {
         </div>
       </div>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
-        <button
-          type="button"
-          className="justify-center py-2 px-4 text-white border-blue-300 border-b-4 shadow-sky-950 shadow- text-sm font-medium rounded-md  bg-primary-blue
-                           hover:bg-secondary-blue  focus:outline-none hover:border-secondary-blue mb-4 md:mb-0"
-        >
-          다운로드
-        </button>
+        <AddFileButton
+          onFilesSelected={file => {
+            console.log(file);
+          }}
+        ></AddFileButton>
         <div className="flex items-center">
           <label
             htmlFor="score"
