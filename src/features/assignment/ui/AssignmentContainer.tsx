@@ -1,11 +1,67 @@
-import { assignmentQueries } from '@/entities/assignment';
+import {
+  assignmentQueries,
+  createAssignment,
+  type AssignmentFile,
+} from '@/entities/assignment';
 import { FileSubmitForm, FileList, AddFileButton } from '@/features/assignment';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  useSuspenseQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
 export default function AssignmentContainer() {
   const { assignmentId } = useParams() as { assignmentId: string };
   const { data } = useSuspenseQuery(assignmentQueries.all(assignmentId));
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: createAssignment,
+
+    onMutate: async (newFile: File) => {
+      const queryKey = assignmentQueries.all(assignmentId).queryKey;
+
+      await queryClient.cancelQueries({ queryKey });
+
+      const previousAssignments = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(queryKey, oldData => {
+        const optimisticAssignment: AssignmentFile = {
+          id: `temp-${newFile.name}`,
+          fileName: newFile.name,
+          fileSize: newFile.size,
+          fileContent: '',
+          status: 'uploading',
+        };
+        return oldData
+          ? [...oldData, optimisticAssignment]
+          : [optimisticAssignment];
+      });
+
+      return { previousAssignments };
+    },
+
+    onError: (_err, _newFile, context) => {
+      const queryKey = assignmentQueries.all(assignmentId).queryKey;
+      if (context?.previousAssignments) {
+        queryClient.setQueryData(queryKey, context.previousAssignments);
+      }
+    },
+  });
+
+  const handleUpload = async (files: FileList) => {
+    const uploadPromises = [];
+    for (const file of files) {
+      const assignmentFile = await mutateAsync(file);
+      uploadPromises.push(assignmentFile);
+    }
+
+    await Promise.allSettled(uploadPromises);
+    queryClient.invalidateQueries({
+      queryKey: assignmentQueries.all(assignmentId).queryKey,
+    });
+  };
 
   return (
     <section className="p-6 md:p-8 mb-4" aria-labelledby="submission-heading">
@@ -15,7 +71,11 @@ export default function AssignmentContainer() {
       >
         과제 제출
       </h2>
-      {data ? <FileList assignmentsFileList={data} /> : <FileSubmitForm />}
+      {data.length !== 0 ? (
+        <FileList assignmentsFileList={data} />
+      ) : (
+        <FileSubmitForm handleUpload={handleUpload} />
+      )}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
         <AddFileButton
           onFilesSelected={file => {

@@ -1,18 +1,9 @@
-import { createAssignment } from '@/entities/assignment';
 import { DropZone } from '@/features/assignment';
-import { useMutation } from '@tanstack/react-query';
 
-export default function FileSubmitForm() {
-  const { mutate } = useMutation({
-    mutationFn: createAssignment,
-  });
-
-  const handleUpload = (files: FileList) => {
-    for (const file of files) {
-      mutate(file);
-    }
-  };
-
+interface FileSubmitFormProps {
+  handleUpload: (files: FileList) => void;
+}
+export default function FileSubmitForm({ handleUpload }: FileSubmitFormProps) {
   return (
     <form>
       <div className="mb-6">

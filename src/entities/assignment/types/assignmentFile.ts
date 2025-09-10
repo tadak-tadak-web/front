@@ -3,4 +3,5 @@ export interface AssignmentFile {
   fileName: string;
   fileContent: string;
   fileSize: number;
+  status?: 'uploading' | 'success' | 'error';
 }
