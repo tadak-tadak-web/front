@@ -1,5 +1,5 @@
 import type { AssignmentFile } from '@/entities/assignment';
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 let ASSIGNMENT_MOCKS: AssignmentFile[] = [];
 
 export const assignmentHandler = [
@@ -11,7 +11,8 @@ export const assignmentHandler = [
 
     return HttpResponse.json({ data: null });
   }),
-  http.post('/api/assignment', () => {
+  http.post('/api/assignment', async () => {
+    await delay(5000);
     const newAssignment: AssignmentFile = {
       id: `a${Date.now()}`,
       fileName: 'upload-success.png',
@@ -28,7 +29,7 @@ export const assignmentHandler = [
     const originalLength = ASSIGNMENT_MOCKS.length;
 
     ASSIGNMENT_MOCKS = ASSIGNMENT_MOCKS.filter(
-      assignment => assignment.id !== assignmentId
+      assignment => assignment.id !== assignmentId,
     );
 
     if (ASSIGNMENT_MOCKS.length < originalLength) {
@@ -36,7 +37,7 @@ export const assignmentHandler = [
     } else {
       return HttpResponse.json(
         { message: '해당 과제를 찾을 수 없습니다.' },
-        { status: 404 }
+        { status: 404 },
       );
     }
   }),

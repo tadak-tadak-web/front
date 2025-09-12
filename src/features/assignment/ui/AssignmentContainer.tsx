@@ -9,7 +9,7 @@ export default function AssignmentContainer() {
   const { data } = useSuspenseQuery({
     ...assignmentQueries.all(assignmentId),
     select: list => {
-      return list.map(data => ({ ...data, status: 'success' }));
+      return list.map(data => ({ ...data, status: data.status || 'success' }));
     },
   });
   const { handleUpload } = useUploadAssignment(assignmentId);
