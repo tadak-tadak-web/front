@@ -7,6 +7,7 @@ interface AssignmentFileListProps {
 export default function FileList({
   assignmentsFileList,
 }: AssignmentFileListProps) {
+  console.log(assignmentsFileList);
   return (
     <ul className="overflow-y-auto">
       {assignmentsFileList.map(assignmentFile => (
