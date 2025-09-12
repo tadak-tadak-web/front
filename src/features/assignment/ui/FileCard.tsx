@@ -1,4 +1,5 @@
 import { deleteAssignment, type AssignmentFile } from '@/entities/assignment';
+import { StatusDisplay } from '@/features/assignment';
 import { DocumentIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { useMutation } from '@tanstack/react-query';
 
@@ -27,7 +28,7 @@ export default function FileCard({ assignmentFile }: FileCardProps) {
           <span>{assignmentFile.fileName}</span>
           <div className="flex gap-2">
             <p className="text-primary-blue">{assignmentFile.fileSize}</p>
-            <p className="text-gray-200">{assignmentFile.status}</p>
+            <StatusDisplay status={assignmentFile.status} />
           </div>
         </div>
         <button
