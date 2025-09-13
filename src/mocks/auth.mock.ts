@@ -4,10 +4,9 @@ const MOCK_ID = 'john';
 const MOCK_PW = 'secret';
 export const authHandlers = [
   http.post<object, { id: string; password: string }>(
-    '/api/login',
+    '/api/user/login',
     async ({ request }) => {
       const { id, password } = await request.json();
-
       if (id === MOCK_ID && password === MOCK_PW) {
         return HttpResponse.json(
           { message: 'Login successful' },
@@ -15,15 +14,15 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          }
+          },
         );
       }
 
       return HttpResponse.json(
         { message: 'Invalid credentials' },
-        { status: 401 }
+        { status: 401 },
       );
-    }
+    },
   ),
 
   http.get('/api/user', ({ cookies }) => {
@@ -39,7 +38,7 @@ export const authHandlers = [
 
     return HttpResponse.json(
       { data: null, message: 'Unauthorized' },
-      { status: 200 }
+      { status: 200 },
     );
   }),
   http.post<object, { id: string; password: string }>(
@@ -54,15 +53,15 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          }
+          },
         );
       }
 
       return HttpResponse.json(
         { message: 'Invalid credentials' },
-        { status: 401 }
+        { status: 401 },
       );
-    }
+    },
   ),
   http.post<object, { id: string }>(
     '/api/user/check-id',
@@ -76,11 +75,11 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          }
+          },
         );
       }
 
       return HttpResponse.json({ status: false }, { status: 200 });
-    }
+    },
   ),
 ];

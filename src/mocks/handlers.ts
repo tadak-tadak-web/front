@@ -1,3 +1,4 @@
+import { assignmentHandler } from '@/mocks/assignment.mock';
 import { authHandlers } from '@/mocks/auth.mock';
 import { courseHandlers } from '@/mocks/course.mock';
 import { kpiHandlers } from '@/mocks/kpi.mock';
@@ -7,4 +8,5 @@ export const handlers = [
   ...kpiHandlers,
   ...courseHandlers,
   ...lectureHandlers,
+  ...assignmentHandler,
 ];
