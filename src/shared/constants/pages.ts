@@ -1,9 +1,5 @@
 import {
   BookOpenIcon,
-  CalendarDaysIcon,
-  ChartBarIcon,
-  UserGroupIcon,
-  TrophyIcon,
   Cog6ToothIcon,
   ClipboardDocumentListIcon,
   AcademicCapIcon,
