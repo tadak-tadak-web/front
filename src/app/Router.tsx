@@ -11,6 +11,7 @@ import {
   Achievements,
   Settings,
   Assignment,
+  Enrollment,
 } from '@/pages';
 import RequireAuth from '@/app/RequireAuth';
 import { LoadingSpinner } from '@/shared';
@@ -42,6 +43,7 @@ const createRouter = (queryClient: QueryClient) => {
             { path: '/instructors', element: <Instructors /> },
             { path: '/achievements', element: <Achievements /> },
             { path: '/settings', element: <Settings /> },
+            { path: '/enrollment', element: <Enrollment /> },
           ],
         },
         {

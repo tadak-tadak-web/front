@@ -8,6 +8,7 @@ import {
   ClipboardDocumentListIcon,
   AcademicCapIcon,
   DocumentCheckIcon,
+  PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 
 export const PAGES = [
@@ -18,28 +19,10 @@ export const PAGES = [
     icon: BookOpenIcon,
   },
   {
-    key: 'schedule',
-    label: '학습 일정',
-    path: '/schedule',
-    icon: CalendarDaysIcon,
-  },
-  {
-    key: 'progress',
-    label: '진행 상황',
-    path: '/progress',
-    icon: ChartBarIcon,
-  },
-  {
-    key: 'instructors',
-    label: '강사 목록',
-    path: '/instructors',
-    icon: UserGroupIcon,
-  },
-  {
-    key: 'achievements',
-    label: '성취 목록',
-    path: '/achievements',
-    icon: TrophyIcon,
+    key: 'enrollment',
+    label: '수강 신청',
+    path: '/enrollment',
+    icon: PencilSquareIcon,
   },
   {
     key: 'settings',
