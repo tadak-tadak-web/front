@@ -1,1 +1,1 @@
-export * from './EnrollmentData';
+export * from './types';

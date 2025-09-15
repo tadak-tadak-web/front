@@ -1,4 +1,4 @@
-export interface EnrollmentData {
+export interface Enrollment {
   id: number;
   imageUrl: string;
   title: string;
