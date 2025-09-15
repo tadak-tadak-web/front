@@ -1,4 +1,7 @@
-export const enrollmentMockData = [
+import type { Enrollment } from '@/entities/enrollment';
+import { http, HttpResponse } from 'msw';
+
+export const enrollmentMockData: Enrollment[] = [
   {
     id: 1,
     imageUrl: 'https://picsum.photos/81',
@@ -35,4 +38,22 @@ export const enrollmentMockData = [
     title: '컴퓨터 비전',
     professor: '이화영',
   },
+];
+
+export const enrollmentHandlers = [
+  http.get('/api/enrollment', ({ cookies }) => {
+    if (cookies.sessionId === 'abc123') {
+      return HttpResponse.json({
+        data: enrollmentMockData,
+      });
+    }
+
+    return HttpResponse.json(
+      {
+        data: null,
+        message: 'Unauthorized',
+      },
+      { status: 401 }
+    );
+  }),
 ];
