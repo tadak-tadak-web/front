@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import type { EnrollmentData } from '@/entities/enrollment';
+import type { Enrollment } from '@/entities/enrollment';
 
-export const useEnrollment = (initialData: EnrollmentData[]) => {
+export const useEnrollment = (initialData: Enrollment[]) => {
   const [availableLectures, setAvailableLectures] =
-    useState<EnrollmentData[]>(initialData);
-  const [enrolledLectures, setEnrolledLectures] = useState<EnrollmentData[]>(
-    []
-  );
+    useState<Enrollment[]>(initialData);
+  const [enrolledLectures, setEnrolledLectures] = useState<Enrollment[]>([]);
 
-  const handleAddLecture = (lecture: EnrollmentData) => {
+  const handleAddLecture = (lecture: Enrollment) => {
     setAvailableLectures(prev => prev.filter(item => item.id !== lecture.id));
     setEnrolledLectures(prev => [...prev, lecture]);
   };
 
-  const handleDeleteLecture = (lecture: EnrollmentData) => {
+  const handleDeleteLecture = (lecture: Enrollment) => {
     setEnrolledLectures(prev => prev.filter(item => item.id !== lecture.id));
     setAvailableLectures(prev => [...prev, lecture]);
   };
