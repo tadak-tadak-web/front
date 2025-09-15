@@ -8,21 +8,21 @@ interface EnrolledListProps {
   onRemoveAll: () => void;
 }
 
-function handleRegisterClick(lectures: EnrollmentData[]) {
-  if (lectures.length === 0) {
-    alert('강의를 선택하세요!');
-    return;
-  }
-
-  const lectureList = lectures.map(l => `- ${l.title}`).join('\n');
-  alert(`다음 강의를 신청합니다:\n${lectureList}`);
-}
-
 export default function EnrolledList({
   lectures,
   onDeleteLecture,
   onRemoveAll,
 }: EnrolledListProps) {
+  function handleRegisterClick(lectures: EnrollmentData[]) {
+    if (lectures.length === 0) {
+      alert('강의를 선택하세요!');
+      return;
+    }
+
+    const lectureList = lectures.map(l => `- ${l.title}`).join('\n');
+    alert(`다음 강의를 신청합니다:\n${lectureList}`);
+  }
+
   return (
     <aside className={clsx('w-[460px]', 'flex-shrink-0', 'space-y-6')}>
       <div className={clsx('flex', 'justify-between', 'items-center', 'mr-2')}>
