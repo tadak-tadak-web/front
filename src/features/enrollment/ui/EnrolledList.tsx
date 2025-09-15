@@ -8,6 +8,16 @@ interface EnrolledListProps {
   onRemoveAll: () => void;
 }
 
+function handleRegisterClick(lectures: EnrollmentData[]) {
+  if (lectures.length === 0) {
+    alert('강의를 선택하세요!');
+    return;
+  }
+
+  const lectureList = lectures.map(l => `- ${l.title}`).join('\n');
+  alert(`다음 강의를 신청합니다:\n${lectureList}`);
+}
+
 export default function EnrolledList({
   lectures,
   onDeleteLecture,
@@ -50,15 +60,7 @@ export default function EnrolledList({
       ))}
 
       <button
-        onClick={() => {
-          if (lectures.length === 0) {
-            alert('강의를 선택하세요!');
-            return;
-          }
-
-          const lectureList = lectures.map(l => `- ${l.title}`).join('\n');
-          alert(`다음 강의를 신청합니다:\n${lectureList}`);
-        }}
+        onClick={() => handleRegisterClick(lectures)}
         className={clsx(
           'w-full',
           'py-3',
