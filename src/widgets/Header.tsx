@@ -12,6 +12,7 @@ export default function Header() {
 
   const lecturePath = `/lecture/${id}`;
   const boardPath = `/lecture/${id}/board`;
+  const noticePath = `/lecture/${id}/notice`;
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10">
@@ -36,6 +37,15 @@ export default function Header() {
                 })}
               >
                 게시판
+              </Link>
+              <Link
+                to={boardPath}
+                className={clsx('px-4', {
+                  'font-bold border-b-2 border-blue-600 pb-2':
+                    pathname === noticePath,
+                })}
+              >
+                공지사항
               </Link>
             </nav>
           </div>
