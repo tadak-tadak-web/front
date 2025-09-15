@@ -8,3 +8,4 @@ export { default as Instructors } from './Instructors';
 export { default as Achievements } from './Achievements';
 export { default as Settings } from './Settings';
 export { default as Assignment } from './Assignment';
+export { default as Enrollment } from './Enrollment';
