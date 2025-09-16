@@ -1,0 +1,6 @@
+export { default as PostForm } from './PostForm';
+export { default as PostList } from './PostList';
+export { default as PostCard } from './PostCard';
+export { default as CommentList } from './CommentList';
+export { default as CommentCard } from './CommentCard';
+export { default as CommentForm } from './CommentForm';

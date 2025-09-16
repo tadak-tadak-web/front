@@ -12,6 +12,7 @@ import {
   Settings,
   Assignment,
   Enrollment,
+  Board,
 } from '@/pages';
 import RequireAuth from '@/app/RequireAuth';
 import { LoadingSpinner } from '@/shared';
@@ -58,6 +59,10 @@ const createRouter = (queryClient: QueryClient) => {
         {
           path: '/lecture/:id/assignments/:assignmentId',
           element: <Assignment />,
+        },
+        {
+          path: '/lecture/:id/board',
+          element: <Board />,
         },
       ],
     },
