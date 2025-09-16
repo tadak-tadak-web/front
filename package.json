@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "@tanstack/react-query": "^5.82.0",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.18",
     "ky": "^1.8.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

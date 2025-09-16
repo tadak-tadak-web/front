@@ -5,6 +5,7 @@ import {
 } from '@heroicons/react/24/outline';
 import type { Post } from '@/entities/board';
 import { CommentForm, CommentList } from '@/features/board';
+import { formatRelativeTime } from '@/shared';
 
 interface PostCardProps {
   post: Post;
@@ -22,7 +23,9 @@ export default function PostCard({ post }: PostCardProps) {
           />
           <div>
             <p className="font-bold text-gray-800">{post.author}</p>
-            <p className="text-xs text-gray-500">{post.time}</p>
+            <p className="text-xs text-gray-500">
+              {formatRelativeTime(post.createdAt, post.updatedAt)}
+            </p>
           </div>
         </div>
         <button className="text-gray-400 hover:text-gray-600">
