@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import EnrollmentCard from './EnrollmentCard';
-import type { EnrollmentData } from '@/entities/enrollment';
+import type { Enrollment } from '@/entities/enrollment';
 
 interface UnEnrolledListProps {
-  lectures: EnrollmentData[];
-  onAddLecture: (lecture: EnrollmentData) => void;
+  lectures: Enrollment[];
+  onAddLecture: (lecture: Enrollment) => void;
 }
 
 export default function UnEnrolledList({
