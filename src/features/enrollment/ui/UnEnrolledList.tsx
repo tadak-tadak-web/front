@@ -5,11 +5,13 @@ import type { Enrollment } from '@/entities/enrollment';
 interface UnEnrolledListProps {
   lectures: Enrollment[];
   onAddLecture: (lectureId: number) => void;
+  onPlanClick: (syllabus: Enrollment['syllabus']) => void;
 }
 
 export default function UnEnrolledList({
   lectures,
   onAddLecture,
+  onPlanClick,
 }: UnEnrolledListProps) {
   return (
     <section className={clsx('w-[750px]', 'space-y-6')}>
@@ -24,7 +26,7 @@ export default function UnEnrolledList({
           title={lecture.title}
           professor={lecture.professor}
           variant="enroll"
-          onPlanClick={() => alert('강의 계획서')}
+          onPlanClick={() => onPlanClick(lecture.syllabus)}
           onActionClick={() => onAddLecture(lecture.id)}
         />
       ))}
