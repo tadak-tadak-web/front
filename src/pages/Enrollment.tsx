@@ -1,16 +1,19 @@
 import { UnEnrolledList, EnrolledList } from '@/features/enrollment/ui';
-import { enrollmentMockData } from '@/mocks/enrollment.mock';
+import { ENROLLMENT_MOCKS } from '@/mocks/enrollment.mock';
 import { useEnrollment } from '@/features/enrollment/model';
 import clsx from 'clsx';
 
 export default function Enrollment() {
-  const {
-    availableLectures,
-    enrolledLectures,
-    handleAddLecture,
-    handleDeleteLecture,
-    handleRemoveAll,
-  } = useEnrollment(enrollmentMockData);
+  const { selectedIds, addEnrollment, removeEnrollment, clearAll } =
+    useEnrollment();
+
+  // 선택 여부에 따라 나눔
+  const unEnrolledLectures = ENROLLMENT_MOCKS.filter(
+    lec => !selectedIds.includes(lec.id)
+  );
+  const enrolledLectures = ENROLLMENT_MOCKS.filter(lec =>
+    selectedIds.includes(lec.id)
+  );
 
   return (
     <div
@@ -33,13 +36,13 @@ export default function Enrollment() {
         )}
       >
         <UnEnrolledList
-          lectures={availableLectures}
-          onAddLecture={handleAddLecture}
+          lectures={unEnrolledLectures}
+          onAddLecture={addEnrollment}
         />
         <EnrolledList
           lectures={enrolledLectures}
-          onDeleteLecture={handleDeleteLecture}
-          onRemoveAll={handleRemoveAll}
+          onDeleteLecture={removeEnrollment}
+          onRemoveAll={clearAll}
         />
       </div>
     </div>

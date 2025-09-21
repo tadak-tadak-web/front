@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 interface EnrolledListProps {
   lectures: Enrollment[];
-  onDeleteLecture: (lecture: Enrollment) => void;
+  onDeleteLecture: (lectureId: number) => void;
   onRemoveAll: () => void;
 }
 
@@ -55,7 +55,7 @@ export default function EnrolledList({
           title={lecture.title}
           professor={lecture.professor}
           variant="enrolled"
-          onActionClick={() => onDeleteLecture(lecture)}
+          onActionClick={() => onDeleteLecture(lecture.id)}
         />
       ))}
 

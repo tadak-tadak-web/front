@@ -1,31 +1,26 @@
 import { useState } from 'react';
-import type { Enrollment } from '@/entities/enrollment';
 
-export const useEnrollment = (initialData: Enrollment[]) => {
-  const [availableLectures, setAvailableLectures] =
-    useState<Enrollment[]>(initialData);
-  const [enrolledLectures, setEnrolledLectures] = useState<Enrollment[]>([]);
+export const useEnrollment = (initialSelectedIds: number[] = []) => {
+  const [selectedIds, setSelectedIds] = useState<number[]>(initialSelectedIds);
 
-  const handleAddLecture = (lecture: Enrollment) => {
-    setAvailableLectures(prev => prev.filter(item => item.id !== lecture.id));
-    setEnrolledLectures(prev => [...prev, lecture]);
+  const addEnrollment = (lectureId: number) => {
+    setSelectedIds(prev =>
+      prev.includes(lectureId) ? prev : [...prev, lectureId]
+    );
   };
 
-  const handleDeleteLecture = (lecture: Enrollment) => {
-    setEnrolledLectures(prev => prev.filter(item => item.id !== lecture.id));
-    setAvailableLectures(prev => [...prev, lecture]);
+  const removeEnrollment = (lectureId: number) => {
+    setSelectedIds(prev => prev.filter(id => id !== lectureId));
   };
 
-  const handleRemoveAll = () => {
-    setAvailableLectures(prev => [...prev, ...enrolledLectures]);
-    setEnrolledLectures([]);
+  const clearAll = () => {
+    setSelectedIds([]);
   };
 
   return {
-    availableLectures,
-    enrolledLectures,
-    handleAddLecture,
-    handleDeleteLecture,
-    handleRemoveAll,
+    selectedIds,
+    addEnrollment,
+    removeEnrollment,
+    clearAll,
   };
 };
