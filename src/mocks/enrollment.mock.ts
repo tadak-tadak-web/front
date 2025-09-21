@@ -1,7 +1,7 @@
 import type { Enrollment } from '@/entities/enrollment';
 import { http, HttpResponse } from 'msw';
 
-export const enrollmentMockData: Enrollment[] = [
+export const ENROLLMENT_MOCKS: Enrollment[] = [
   {
     id: 1,
     imageUrl: 'https://picsum.photos/81',
@@ -44,7 +44,7 @@ export const enrollmentHandlers = [
   http.get('/api/enrollment', ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({
-        data: enrollmentMockData,
+        data: ENROLLMENT_MOCKS,
       });
     }
 
