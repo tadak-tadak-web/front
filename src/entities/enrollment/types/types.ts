@@ -3,4 +3,8 @@ export interface Enrollment {
   imageUrl: string;
   title: string;
   professor: string;
+  syllabus: {
+    fileUrl: string;
+    fileType: 'pdf' | 'image';
+  };
 }

@@ -2,12 +2,16 @@ import { UnEnrolledList, EnrolledList } from '@/features/enrollment/ui';
 import { ENROLLMENT_MOCKS } from '@/mocks/enrollment.mock';
 import { useEnrollment } from '@/features/enrollment/model';
 import clsx from 'clsx';
+import { useSyllabusViewer } from '@/features/enrollment/model/useSyllabusViewer';
+import SyllabusViewer from '@/features/enrollment/ui/SyllabusViewer';
+import Modal from '@/shared/ui/Modal';
 
 export default function Enrollment() {
   const { selectedIds, addEnrollment, removeEnrollment, clearAll } =
     useEnrollment();
 
-  // 선택 여부에 따라 나눔
+  const { syllabus, open, close } = useSyllabusViewer();
+
   const unEnrolledLectures = ENROLLMENT_MOCKS.filter(
     lec => !selectedIds.includes(lec.id)
   );
@@ -16,14 +20,7 @@ export default function Enrollment() {
   );
 
   return (
-    <div
-      className={clsx(
-        'w-screen',
-        'overflow-x-auto',
-        'bg-gray-50',
-        'min-h-screen'
-      )}
-    >
+    <div className={clsx('overflow-x-auto', 'bg-gray-50', 'min-h-screen')}>
       <div
         className={clsx(
           'flex',
@@ -38,6 +35,7 @@ export default function Enrollment() {
         <UnEnrolledList
           lectures={unEnrolledLectures}
           onAddLecture={addEnrollment}
+          onPlanClick={open}
         />
         <EnrolledList
           lectures={enrolledLectures}
@@ -45,6 +43,12 @@ export default function Enrollment() {
           onRemoveAll={clearAll}
         />
       </div>
+
+      {syllabus && (
+        <Modal onClose={close}>
+          <SyllabusViewer syllabus={syllabus} />
+        </Modal>
+      )}
     </div>
   );
 }
