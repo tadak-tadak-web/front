@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useEnrollment = (initialSelectedIds: number[] = []) => {
+export const useSelectedEnrollment = (initialSelectedIds: number[] = []) => {
   const [selectedIds, setSelectedIds] = useState<number[]>(initialSelectedIds);
 
   const addEnrollment = (lectureId: number) => {

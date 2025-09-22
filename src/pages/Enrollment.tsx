@@ -1,6 +1,6 @@
 import { UnEnrolledList, EnrolledList } from '@/features/enrollment/ui';
 import { ENROLLMENT_MOCKS } from '@/mocks/enrollment.mock';
-import { useEnrollment } from '@/features/enrollment/model';
+import { useSelectedEnrollment } from '@/features/enrollment/hooks';
 import clsx from 'clsx';
 import { useSyllabusViewer } from '@/features/enrollment/model/useSyllabusViewer';
 import SyllabusViewer from '@/features/enrollment/ui/SyllabusViewer';
@@ -8,7 +8,7 @@ import Modal from '@/shared/ui/Modal';
 
 export default function Enrollment() {
   const { selectedIds, addEnrollment, removeEnrollment, clearAll } =
-    useEnrollment();
+    useSelectedEnrollment();
 
   const { syllabus, open, close } = useSyllabusViewer();
 
