@@ -28,7 +28,7 @@ export function usePdfViewer(numPages: number | undefined) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [numPages]);
+  }, []);
 
   return { pageNumber, goToPrevPage, goToNextPage };
 }
