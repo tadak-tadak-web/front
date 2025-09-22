@@ -59,7 +59,6 @@ export default function Editor({ value, onChange }: EditorProps) {
               const quill = quillRef.current.getEditor();
               const range = quill.getSelection(true);
               console.log(file);
-              // 파일 이름으로 링크를 만들고 삽입합니다.
               quill.insertText(range.index, file.name, 'link', '#');
               quill.setSelection(range.index + file.name.length, 0);
             };
@@ -87,29 +86,33 @@ export default function Editor({ value, onChange }: EditorProps) {
         placeholder="여기에 내용을 입력하세요..."
       />
       <div
-        className="flex items-center gap-1 p-2 border-t text-gray-500 border-none"
+        className="flex items-center gap-1 p-2 !border-none text-gray-500"
         id="toolbar"
       >
         <button
           type="button"
-          className="ql-image p-2 hover:bg-gray-100 rounded-full"
+          title="이미지"
+          className="ql-image p-2 !border-none hover:bg-gray-100 rounded-full"
         >
           <PhotoIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
+          title="링크"
           className="ql-link p-2 hover:bg-gray-100 rounded-full"
         >
           <LinkIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
+          title="코드 블록"
           className="ql-code-block p-2 hover:bg-gray-100 rounded-full"
         >
           <CodeBracketIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
+          title="파일"
           className="ql-file p-2 hover:bg-gray-100 rounded-full"
         >
           <PaperClipIcon className="h-5 w-5" />

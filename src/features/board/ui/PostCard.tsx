@@ -4,7 +4,7 @@ import {
   ChatBubbleOvalLeftEllipsisIcon,
 } from '@heroicons/react/24/outline';
 import type { Post } from '@/entities/board';
-import { CommentForm, CommentList } from '@/features/board';
+import { CommentForm, CommentList, PostViewer } from '@/features/board';
 import { formatRelativeTime } from '@/shared';
 
 interface PostCardProps {
@@ -34,17 +34,9 @@ export default function PostCard({ post }: PostCardProps) {
       </div>
 
       <div className="ml-15 pl-1">
-        <p className="text-gray-800 mb-3">{post.content}</p>
-        {post.imageUrl &&
-          post.imageUrl.map((url, index) => (
-            <div className="max-w-xs mb-3" key={url}>
-              <img
-                src={url}
-                alt={`게시물 이미지 ${index + 1}`}
-                className="rounded-lg border"
-              />
-            </div>
-          ))}
+        <p className="text-gray-800 mb-3">
+          <PostViewer dirtyHtml={post.content} />
+        </p>
         <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
           <div className="flex items-center gap-1">
             <HeartIcon className="h-4 w-4" />
