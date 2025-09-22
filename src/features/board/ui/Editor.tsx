@@ -1,3 +1,4 @@
+import 'react-quill-new/dist/quill.snow.css';
 import {
   CodeBracketIcon,
   EllipsisHorizontalIcon,
@@ -5,18 +6,22 @@ import {
   PaperClipIcon,
   PhotoIcon,
 } from '@heroicons/react/24/outline';
+import hljs from 'highlight.js';
 import ReactQuill, { Quill } from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
 import { useRef, useMemo } from 'react';
 import { ImageResize } from 'quill-image-resize-module-ts';
-
+import 'highlight.js/styles/atom-one-dark.css';
+const Syntax = Quill.import('modules/syntax');
+Quill.register('modules/syntax', Syntax);
 Quill.register('modules/imageResize', ImageResize);
 interface EditorProps {
   value: string;
   onChange: (value: string) => void;
 }
-
-const formats = ['image', 'link', 'code-block'];
+hljs.configure({
+  languages: ['javascript', 'ruby', 'python', 'java', 'cpp', 'kotlin', 'sql'],
+});
+const formats = ['image', 'link', 'code-block', 'file'];
 
 export default function Editor({ value, onChange }: EditorProps) {
   const quillRef = useRef<ReactQuill>(null);
@@ -58,7 +63,6 @@ export default function Editor({ value, onChange }: EditorProps) {
               if (!file || !quillRef.current) return;
               const quill = quillRef.current.getEditor();
               const range = quill.getSelection(true);
-              console.log(file);
               quill.insertText(range.index, file.name, 'link', '#');
               quill.setSelection(range.index + file.name.length, 0);
             };
@@ -69,6 +73,7 @@ export default function Editor({ value, onChange }: EditorProps) {
         modules: ['Resize', 'DisplaySize'],
         parchment: Quill.import('parchment'),
       },
+      syntax: { hljs },
     }),
     []
   );

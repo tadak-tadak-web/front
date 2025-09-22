@@ -34,9 +34,9 @@ export default function PostCard({ post }: PostCardProps) {
       </div>
 
       <div className="ml-15 pl-1">
-        <p className="text-gray-800 mb-3">
+        <div className="text-gray-800 mb-3">
           <PostViewer dirtyHtml={post.content} />
-        </p>
+        </div>
         <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
           <div className="flex items-center gap-1">
             <HeartIcon className="h-4 w-4" />
