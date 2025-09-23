@@ -1,11 +1,7 @@
-import type { Enrollment } from '@/entities/enrollment';
+import type { Syllabus } from '@/entities/enrollment';
 import PdfViewer from './PdfViewer';
 
-export default function SyllabusViewer({
-  syllabus,
-}: {
-  syllabus: Enrollment['syllabus'];
-}) {
+export default function SyllabusViewer({ syllabus }: { syllabus: Syllabus }) {
   if (!syllabus?.fileUrl) {
     return <p>강의 계획서 파일이 없습니다.</p>;
   }

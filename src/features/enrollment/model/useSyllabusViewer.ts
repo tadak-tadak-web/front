@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import type { Enrollment } from '@/entities/enrollment';
+import type { Syllabus } from '@/entities/enrollment';
 
 export const useSyllabusViewer = () => {
-  const [syllabus, setSyllabus] = useState<Enrollment['syllabus'] | null>(null);
+  const [syllabus, setSyllabus] = useState<Syllabus | null>(null);
 
-  const open = (s: Enrollment['syllabus']) => setSyllabus(s);
+  const open = (s: Syllabus) => setSyllabus(s);
   const close = () => setSyllabus(null);
 
   return { syllabus, open, close };

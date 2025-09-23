@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import EnrollmentCard from './EnrollmentCard';
-import type { Enrollment } from '@/entities/enrollment';
+import type { Enrollment, Syllabus } from '@/entities/enrollment';
 
 interface UnEnrolledListProps {
   lectures: Enrollment[];
   onAddLecture: (lectureId: number) => void;
-  onPlanClick: (syllabus: Enrollment['syllabus']) => void;
+  onPlanClick: (syllabus: Syllabus) => void;
 }
 
 export default function UnEnrolledList({
