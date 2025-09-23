@@ -40,3 +40,22 @@
   --color-gray-500: #403e39;
   --color-gray-600: #121f1c;
 }
+@layer base {
+  /* <pre> 태그에 대한 전역 스타일 (코드 블록 컨테이너) */
+  pre {
+    @apply bg-slate-800 text-slate-200 p-4 rounded-lg overflow-x-auto my-4;
+  }
+
+  /* <pre> 태그 내부에 있는 <code> 태그에 대한 스타일 */
+  pre > code {
+    @apply font-mono text-sm;
+  }
+
+  /*
+    인라인(inline) 코드에 대한 별도 스타일 (선택사항)
+    :not(pre) > code 선택자는 <pre> 태그의 자식이 아닌 <code> 태그만 선택합니다.
+  */
+  :not(pre) > code {
+    @apply bg-gray-200 text-gray-800 rounded px-1.5 py-1 text-[0.9em] font-mono;
+  }
+}

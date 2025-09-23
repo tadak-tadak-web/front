@@ -1,4 +1,4 @@
-import 'react-quill-new/dist/quill.snow.css';
+import { useCallback } from 'react';
 import {
   CodeBracketIcon,
   EllipsisHorizontalIcon,
@@ -6,123 +6,137 @@ import {
   PaperClipIcon,
   PhotoIcon,
 } from '@heroicons/react/24/outline';
-import hljs from 'highlight.js';
-import ReactQuill, { Quill } from 'react-quill-new';
-import { useRef, useMemo } from 'react';
-import { ImageResize } from 'quill-image-resize-module-ts';
-import 'highlight.js/styles/atom-one-dark.css';
-const Syntax = Quill.import('modules/syntax');
-Quill.register('modules/syntax', Syntax);
-Quill.register('modules/imageResize', ImageResize);
+import { useEditor, EditorContent } from '@tiptap/react';
+import Image from '@tiptap/extension-image';
+import Link from '@tiptap/extension-link';
+import StarterKit from '@tiptap/starter-kit';
+import { ResizableImage } from 'tiptap-extension-resizable-image';
+import 'tiptap-extension-resizable-image/styles.css';
+import Code from '@tiptap/extension-code';
+
 interface EditorProps {
   value: string;
   onChange: (value: string) => void;
 }
-hljs.configure({
-  languages: ['javascript', 'ruby', 'python', 'java', 'cpp', 'kotlin', 'sql'],
-});
-const formats = ['image', 'link', 'code-block', 'file'];
 
 export default function Editor({ value, onChange }: EditorProps) {
-  const quillRef = useRef<ReactQuill>(null);
-
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: '#toolbar',
-        handlers: {
-          image: () => {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.setAttribute('accept', 'image/*');
-            input.click();
-
-            input.onchange = async () => {
-              const file = input.files?.[0];
-              if (!file) return;
-
-              const reader = new FileReader();
-              reader.onload = () => {
-                const base64Image = reader.result;
-
-                if (quillRef.current) {
-                  const quill = quillRef.current.getEditor();
-                  const range = quill.getSelection();
-                  quill.insertEmbed(range?.index || 0, 'image', base64Image);
-                }
-              };
-              reader.readAsDataURL(file);
-            };
-          },
-          file: () => {
-            const input = document.createElement('input');
-            input.setAttribute('type', 'file');
-            input.click();
-            input.onchange = () => {
-              const file = input.files?.[0];
-              if (!file || !quillRef.current) return;
-              const quill = quillRef.current.getEditor();
-              const range = quill.getSelection(true);
-              quill.insertText(range.index, file.name, 'link', '#');
-              quill.setSelection(range.index + file.name.length, 0);
-            };
-          },
-        },
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        codeBlock: false,
+      }),
+      ResizableImage,
+      Image,
+      Code,
+      Link.configure({ openOnClick: false }),
+    ],
+    content: value,
+    onUpdate: ({ editor }) => {
+      onChange(editor.getHTML());
+    },
+    editorProps: {
+      attributes: {
+        class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl',
       },
-      imageResize: {
-        modules: ['Resize', 'DisplaySize'],
-        parchment: Quill.import('parchment'),
-      },
-      syntax: { hljs },
-    }),
-    []
-  );
+    },
+  });
+
+  const imageHandler = useCallback(() => {
+    if (!editor) return;
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.click();
+
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result as string;
+        editor.chain().focus().setImage({ src: base64Image }).run();
+      };
+      reader.readAsDataURL(file);
+    };
+  }, [editor]);
+
+  const fileHandler = useCallback(() => {
+    if (!editor) return;
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.click();
+
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      editor
+        .chain()
+        .focus()
+        .insertContent(`<a href="#" download="${file.name}">${file.name}</a>`)
+        .run();
+    };
+  }, [editor]);
+
+  const linkHandler = useCallback(() => {
+    if (!editor) return;
+    const previousUrl = editor.getAttributes('link').href;
+    const url = window.prompt('URL', previousUrl);
+
+    if (url === null) return;
+    if (url === '') {
+      editor.chain().focus().extendMarkRange('link').unsetLink().run();
+      return;
+    }
+    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+  }, [editor]);
 
   return (
-    <div className="custom-editor-wrapper">
-      <ReactQuill
-        className="h-30 mb-2"
-        ref={quillRef}
-        theme="snow"
-        value={value}
-        onChange={onChange}
-        modules={modules}
-        formats={formats}
-        placeholder="여기에 내용을 입력하세요..."
-      />
+    <div className="custom-editor-wrapper border rounded-md">
+      <EditorContent editor={editor} className="editor" />
       <div
-        className="flex items-center gap-1 p-2 !border-none text-gray-500"
         id="toolbar"
+        className="flex items-center gap-1 p-2 border-t !border-none text-gray-500"
       >
         <button
           type="button"
           title="이미지"
-          className="ql-image p-2 !border-none hover:bg-gray-100 rounded-full"
+          onClick={imageHandler}
+          className="p-2 !border-none hover:bg-gray-100 rounded-full"
         >
           <PhotoIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
           title="링크"
-          className="ql-link p-2 hover:bg-gray-100 rounded-full"
+          onClick={linkHandler}
+          className={`p-2 !border-none hover:bg-gray-100 rounded-full ${
+            editor?.isActive('link') ? 'bg-gray-200 text-blue-500' : ''
+          }`}
         >
           <LinkIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
           title="코드 블록"
-          className="ql-code-block p-2 hover:bg-gray-100 rounded-full"
+          onClick={() => editor.chain().focus().toggleCode().run()}
+          className={`p-2 !border-none hover:bg-gray-100 rounded-full ${
+            editor?.isActive('codeBlock') ? 'bg-gray-200 text-blue-500' : ''
+          }`}
         >
           <CodeBracketIcon className="h-5 w-5" />
         </button>
         <button
           type="button"
           title="파일"
-          className="ql-file p-2 hover:bg-gray-100 rounded-full"
+          onClick={fileHandler}
+          className="p-2 !border-none hover:bg-gray-100 rounded-full"
         >
           <PaperClipIcon className="h-5 w-5" />
         </button>
-        <button type="button" className="p-2 hover:bg-gray-100 rounded-full">
+        <button
+          type="button"
+          className="p-2 !border-none hover:bg-gray-100 rounded-full"
+        >
           <EllipsisHorizontalIcon className="h-5 w-5" />
         </button>
       </div>
