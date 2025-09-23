@@ -4,3 +4,6 @@ export { default as EnrollmentInfo } from './EnrollmentInfo';
 export { default as EnrollmentLecturerImage } from './EnrollmentLecturerImage';
 export { default as UnEnrolledList } from './UnEnrolledList';
 export { default as EnrolledList } from './EnrolledList';
+export { default as PdfViewer } from './PdfViewer';
+export { default as PageController } from './PageController';
+export { default as SyllabusViewer } from './SyllabusViewer';
