@@ -6,6 +6,7 @@ const mockPosts: Post[] = [
   {
     id: 1,
     author: '홍길동',
+    authorId: 'hong123',
     avatar: '/images/avatar1.png',
     content: '첫 번째 게시글입니다.',
     imageUrl: [
@@ -20,6 +21,7 @@ const mockPosts: Post[] = [
   {
     id: 2,
     author: '김철수',
+    authorId: 'kim456',
     avatar: '/images/avatar2.png',
     content: '두 번째 게시글입니다.',
     imageUrl: null,
@@ -40,12 +42,13 @@ function getUserIdFromCookie(cookies: Record<string, string>) {
 
 export const boardHandlers = [
   // 게시글 등록(Post)
-  http.post<object, Post>('/api/board/posts', async ({ request, cookies }) => {
-    const userId = getUserIdFromCookie(cookies);
+  http.post<object, Post>('/api/board/posts', async ({ request }) => {
     const body = await request.json();
+    console.log('Creating post with body:', body);
     const newPost: Post = {
       id: mockPosts.length + 1,
-      author: userId ?? body.author ?? '익명',
+      authorId: body.authorId ?? 'anonymous',
+      author: body.author ?? '익명',
       avatar: body.avatar ?? '',
       content: body.content ?? '',
       imageUrl: body.imageUrl ?? null,

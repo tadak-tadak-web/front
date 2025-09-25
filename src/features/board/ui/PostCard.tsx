@@ -6,12 +6,15 @@ import {
 import type { Post } from '@/entities/board';
 import { CommentForm, CommentList, PostViewer } from '@/features/board';
 import { formatRelativeTime } from '@/shared';
+import { useAuth } from '@/entities/user/hooks/useAuth';
 
 interface PostCardProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  console.log(useAuth(), post.author);
+
   return (
     <article className="bg-white rounded-xl shadow-md p-5">
       <div className="flex justify-between items-start mb-3">

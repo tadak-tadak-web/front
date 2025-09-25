@@ -1,6 +1,7 @@
 export interface Post {
   id: number;
   author: string;
+  authorId: string;
   avatar: string;
   content: string;
   imageUrl: string[] | null;
