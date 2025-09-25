@@ -106,4 +106,41 @@ export const boardHandlers = [
     mockPosts.splice(postIdx, 1);
     return HttpResponse.json({ message: '삭제되었습니다.' });
   }),
+  http.post('/api/files/upload', async ({ request, cookies }) => {
+    // 1. 유저 인증 확인
+    const userId = getUserIdFromCookie(cookies);
+    if (!userId) {
+      return HttpResponse.json(
+        { message: '권한이 없습니다.' },
+        { status: 403 }
+      );
+    }
+
+    const formData = await request.formData();
+    const file = formData.get('file'); // 클라이언트에서 'file'이라는 키로 보냈다고 가정
+
+    // 3. 파일 유효성 검사
+    if (!file || !(file instanceof File)) {
+      return HttpResponse.json(
+        { message: '파일이 올바르지 않습니다.' },
+        { status: 400 }
+      );
+    }
+
+    // 4. 모킹: 실제 업로드 대신, 가짜 URL 생성
+    // 파일 이름과 현재 시간을 조합하여 고유한 URL처럼 보이게 만듭니다.
+    const mockFileUrl = `/uploads/mock-${Date.now()}-${file.name}`;
+
+    console.log(`[MSW] Mock file uploaded: ${file.name} -> ${mockFileUrl}`);
+
+    // 5. 성공 응답 반환 (업로드된 파일의 URL 포함)
+    return HttpResponse.json(
+      {
+        data: {
+          url: mockFileUrl,
+        },
+      },
+      { status: 201 } // 201 Created
+    );
+  }),
 ];

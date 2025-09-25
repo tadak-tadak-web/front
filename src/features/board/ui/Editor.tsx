@@ -13,6 +13,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { ResizableImage } from 'tiptap-extension-resizable-image';
 import 'tiptap-extension-resizable-image/styles.css';
 import Code from '@tiptap/extension-code';
+import { useTiptapFileUpload } from '@/features/board/model';
 
 interface EditorProps {
   value: string;
@@ -40,48 +41,15 @@ export default function Editor({ value, onChange }: EditorProps) {
       },
     },
   });
+  const { uploadImage, uploadFile } = useTiptapFileUpload({
+    editor,
+  });
 
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
       editor.commands.setContent(value);
     }
   }, [value, editor]);
-
-  const imageHandler = useCallback(() => {
-    if (!editor) return;
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
-
-    input.onchange = () => {
-      const file = input.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64Image = reader.result as string;
-        editor.chain().focus().setImage({ src: base64Image }).run();
-      };
-      reader.readAsDataURL(file);
-    };
-  }, [editor]);
-
-  const fileHandler = useCallback(() => {
-    if (!editor) return;
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.click();
-
-    input.onchange = () => {
-      const file = input.files?.[0];
-      if (!file) return;
-      editor
-        .chain()
-        .focus()
-        .insertContent(`<a href="#" download="${file.name}">${file.name}</a>`)
-        .run();
-    };
-  }, [editor]);
 
   const linkHandler = useCallback(() => {
     if (!editor) return;
@@ -106,7 +74,7 @@ export default function Editor({ value, onChange }: EditorProps) {
         <button
           type="button"
           title="이미지"
-          onClick={imageHandler}
+          onClick={uploadImage}
           className="p-2 !border-none hover:bg-gray-100 rounded-full"
         >
           <PhotoIcon className="h-5 w-5" />
@@ -134,7 +102,7 @@ export default function Editor({ value, onChange }: EditorProps) {
         <button
           type="button"
           title="파일"
-          onClick={fileHandler}
+          onClick={uploadFile}
           className="p-2 !border-none hover:bg-gray-100 rounded-full"
         >
           <PaperClipIcon className="h-5 w-5" />
