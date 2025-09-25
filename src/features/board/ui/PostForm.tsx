@@ -3,7 +3,6 @@ import Editor from '@/features/board/ui/Editor';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import 'react-quill-new/dist/quill.snow.css';
 export default function PostForm() {
   const [content, setContent] = useState('');
   const queryClient = useQueryClient();

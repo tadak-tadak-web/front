@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   CodeBracketIcon,
   EllipsisHorizontalIcon,
@@ -40,6 +40,12 @@ export default function Editor({ value, onChange }: EditorProps) {
       },
     },
   });
+
+  useEffect(() => {
+    if (editor && value !== editor.getHTML()) {
+      editor.commands.setContent(value);
+    }
+  }, [value, editor]);
 
   const imageHandler = useCallback(() => {
     if (!editor) return;

@@ -40,6 +40,11 @@
   --color-gray-500: #403e39;
   --color-gray-600: #121f1c;
 }
+
+.ProseMirror {
+  @apply min-h-[150px] p-3 outline-none;
+  /* 일반 CSS 대신 Tailwind 클래스를 여기에 적용합니다. */
+}
 @layer base {
   /* <pre> 태그에 대한 전역 스타일 (코드 블록 컨테이너) */
   pre {
