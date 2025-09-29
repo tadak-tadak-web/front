@@ -15,7 +15,6 @@ export const useTiptapFileUpload = ({ editor }: UseTiptapFileUploadProps) => {
       const { url } = data;
       const file = variables;
 
-      // 업로드된 파일이 이미지인지 확인
       if (file.type.startsWith('image/')) {
         editor.chain().focus().setImage({ src: url }).run();
       } else {

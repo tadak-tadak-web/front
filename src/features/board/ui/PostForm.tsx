@@ -27,16 +27,7 @@ export default function PostForm() {
       className="bg-white rounded-xl shadow-md p-4 mb-6"
       onSubmit={handleSubmit}
     >
-      <Editor value={content} onChange={setContent} />
-      <div className="flex justify-between items-center mt-2">
-        <div className="flex items-center gap-1 text-gray-500"></div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white font-bold py-2 px-5 rounded-lg hover:bg-blue-600 transition-colors"
-        >
-          업로드
-        </button>
-      </div>
+      <Editor value={content} onChange={setContent} isEditable />
     </form>
   );
 }

@@ -3,3 +3,7 @@ export interface CreatePostRequest {
   authorId: string;
   author: string;
 }
+
+export interface EditPostRequest extends CreatePostRequest {
+  id: number;
+}

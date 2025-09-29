@@ -13,7 +13,6 @@ export default function Board() {
         <div
           className={clsx(
             'custom-editor-wrapper',
-            'border',
             'rounded-md',
 
             '[&_.ProseMirror]:min-h-[150px]',

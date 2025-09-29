@@ -1,10 +1,10 @@
 import { api } from '@/shared';
-import type { Post } from '@/entities/board';
+import type { EditPostRequest, Post } from '@/entities/board';
 
-export const editPost = async (id: number, post: Partial<Post>) => {
+export const editPost = async (data: EditPostRequest) => {
   const response = await api
-    .put(`board/posts/${id}`, {
-      json: post,
+    .put(`board/posts/${data.id}`, {
+      json: data,
     })
     .json<{ data: Post }>();
   return response.data;

@@ -6,3 +6,4 @@ export { default as CommentCard } from './CommentCard';
 export { default as CommentForm } from './CommentForm';
 export { default as Editor } from './Editor';
 export { default as PostViewer } from './PostViewer';
+export { default as PostDropdown } from './PostDropdown';

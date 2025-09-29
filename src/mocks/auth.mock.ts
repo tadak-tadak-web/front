@@ -29,7 +29,7 @@ export const authHandlers = [
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({
         data: {
-          id: 'abc-123',
+          id: 'abc123',
           nickname: 'John',
         },
       });

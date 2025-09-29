@@ -34,10 +34,7 @@ const mockPosts: Post[] = [
 
 // 유저 인증 모킹 (간단히 쿠키로 판별)
 function getUserIdFromCookie(cookies: Record<string, string>) {
-  // 예시: sessionId가 있으면 '홍길동'으로 간주
-  if (cookies.sessionId === 'abc123') return '홍길동';
-  if (cookies.sessionId === 'def456') return '김철수';
-  return null;
+  return cookies.sessionId;
 }
 
 export const boardHandlers = [
@@ -97,10 +94,9 @@ export const boardHandlers = [
     const userId = getUserIdFromCookie(cookies);
     const { id } = params;
     const postIdx = mockPosts.findIndex(p => p.id === Number(id));
-    if (postIdx === -1) {
-      return HttpResponse.json({ message: 'Not found' }, { status: 404 });
-    }
-    if (mockPosts[postIdx].author !== userId) {
+
+    console.log(mockPosts[postIdx].authorId, userId);
+    if (mockPosts[postIdx].authorId !== userId) {
       return HttpResponse.json(
         { message: '권한이 없습니다.' },
         { status: 403 }
