@@ -1,10 +1,10 @@
 import EnrollmentCard from './EnrollmentCard';
-import type { EnrollmentData } from '@/entities/enrollment';
+import type { Enrollment } from '@/entities/enrollment';
 import clsx from 'clsx';
 
 interface EnrolledListProps {
-  lectures: EnrollmentData[];
-  onDeleteLecture: (lecture: EnrollmentData) => void;
+  lectures: Enrollment[];
+  onDeleteLecture: (lectureId: number) => void;
   onRemoveAll: () => void;
 }
 
@@ -13,7 +13,7 @@ export default function EnrolledList({
   onDeleteLecture,
   onRemoveAll,
 }: EnrolledListProps) {
-  function handleRegisterClick(lectures: EnrollmentData[]) {
+  function handleRegisterClick(lectures: Enrollment[]) {
     if (lectures.length === 0) {
       alert('강의를 선택하세요!');
       return;
@@ -55,7 +55,7 @@ export default function EnrolledList({
           title={lecture.title}
           professor={lecture.professor}
           variant="enrolled"
-          onActionClick={() => onDeleteLecture(lecture)}
+          onActionClick={() => onDeleteLecture(lecture.id)}
         />
       ))}
 

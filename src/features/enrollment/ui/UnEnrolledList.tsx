@@ -1,15 +1,17 @@
 import clsx from 'clsx';
 import EnrollmentCard from './EnrollmentCard';
-import type { EnrollmentData } from '@/entities/enrollment';
+import type { Enrollment, Syllabus } from '@/entities/enrollment';
 
 interface UnEnrolledListProps {
-  lectures: EnrollmentData[];
-  onAddLecture: (lecture: EnrollmentData) => void;
+  lectures: Enrollment[];
+  onAddLecture: (lectureId: number) => void;
+  onPlanClick: (syllabus: Syllabus) => void;
 }
 
 export default function UnEnrolledList({
   lectures,
   onAddLecture,
+  onPlanClick,
 }: UnEnrolledListProps) {
   return (
     <section className={clsx('w-[750px]', 'space-y-6')}>
@@ -24,8 +26,8 @@ export default function UnEnrolledList({
           title={lecture.title}
           professor={lecture.professor}
           variant="enroll"
-          onPlanClick={() => alert('강의 계획서')}
-          onActionClick={() => onAddLecture(lecture)}
+          onPlanClick={() => onPlanClick(lecture.syllabus)}
+          onActionClick={() => onAddLecture(lecture.id)}
         />
       ))}
     </section>

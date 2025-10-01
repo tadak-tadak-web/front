@@ -1,26 +1,26 @@
 import { UnEnrolledList, EnrolledList } from '@/features/enrollment/ui';
-import { enrollmentMockData } from '@/mocks/enrollment.mock';
-import { useEnrollment } from '@/features/enrollment/model';
+import { ENROLLMENT_MOCKS } from '@/mocks/enrollment.mock';
+import { useSelectedEnrollment } from '@/features/enrollment/hooks';
 import clsx from 'clsx';
+import { useSyllabusViewer } from '@/features/enrollment/model/useSyllabusViewer';
+import SyllabusViewer from '@/features/enrollment/ui/SyllabusViewer';
+import Modal from '@/shared/ui/Modal';
 
 export default function Enrollment() {
-  const {
-    availableLectures,
-    enrolledLectures,
-    handleAddLecture,
-    handleDeleteLecture,
-    handleRemoveAll,
-  } = useEnrollment(enrollmentMockData);
+  const { selectedIds, addEnrollment, removeEnrollment, clearAll } =
+    useSelectedEnrollment();
+
+  const { syllabus, open, close } = useSyllabusViewer();
+
+  const unEnrolledLectures = ENROLLMENT_MOCKS.filter(
+    lec => !selectedIds.includes(lec.id)
+  );
+  const enrolledLectures = ENROLLMENT_MOCKS.filter(lec =>
+    selectedIds.includes(lec.id)
+  );
 
   return (
-    <div
-      className={clsx(
-        'w-screen',
-        'overflow-x-auto',
-        'bg-gray-50',
-        'min-h-screen'
-      )}
-    >
+    <div className={clsx('overflow-x-auto', 'bg-gray-50', 'min-h-screen')}>
       <div
         className={clsx(
           'flex',
@@ -33,15 +33,22 @@ export default function Enrollment() {
         )}
       >
         <UnEnrolledList
-          lectures={availableLectures}
-          onAddLecture={handleAddLecture}
+          lectures={unEnrolledLectures}
+          onAddLecture={addEnrollment}
+          onPlanClick={open}
         />
         <EnrolledList
           lectures={enrolledLectures}
-          onDeleteLecture={handleDeleteLecture}
-          onRemoveAll={handleRemoveAll}
+          onDeleteLecture={removeEnrollment}
+          onRemoveAll={clearAll}
         />
       </div>
+
+      {syllabus && (
+        <Modal onClose={close}>
+          <SyllabusViewer syllabus={syllabus} />
+        </Modal>
+      )}
     </div>
   );
 }
