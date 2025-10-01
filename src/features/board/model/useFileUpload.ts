@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { type Editor } from '@tiptap/react';
+import type { Editor } from '@tiptap/react';
 import { createFile } from '@/entities/board';
 
 interface UseTiptapFileUploadProps {
