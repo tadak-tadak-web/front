@@ -61,6 +61,11 @@ export default function Editor({ value, onChange, isEditable }: EditorProps) {
 
   const linkHandler = useCallback(() => {
     if (!editor) return;
+
+    if (editor.state.selection.empty) {
+      alert('링크를 걸 텍스트를 먼저 선택해주세요.');
+      return;
+    }
     const previousUrl = editor.getAttributes('link').href;
     const url = window.prompt('URL', previousUrl);
 
