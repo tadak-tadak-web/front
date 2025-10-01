@@ -14,31 +14,30 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          },
+          }
         );
       }
 
       return HttpResponse.json(
         { message: 'Invalid credentials' },
-        { status: 401 },
+        { status: 401 }
       );
-    },
+    }
   ),
 
   http.get('/api/user', ({ cookies }) => {
     if (cookies.sessionId === 'abc123') {
       return HttpResponse.json({
         data: {
-          id: 'abc-123',
-          firstName: 'John',
-          lastName: 'Maverick',
+          id: 'abc123',
+          nickname: 'John',
         },
       });
     }
 
     return HttpResponse.json(
       { data: null, message: 'Unauthorized' },
-      { status: 200 },
+      { status: 200 }
     );
   }),
   http.post<object, { id: string; password: string }>(
@@ -53,15 +52,15 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          },
+          }
         );
       }
 
       return HttpResponse.json(
         { message: 'Invalid credentials' },
-        { status: 401 },
+        { status: 401 }
       );
-    },
+    }
   ),
   http.post<object, { id: string }>(
     '/api/user/check-id',
@@ -75,11 +74,11 @@ export const authHandlers = [
             headers: {
               'set-cookie': 'sessionId=abc123; Path=/api;',
             },
-          },
+          }
         );
       }
 
       return HttpResponse.json({ status: false }, { status: 200 });
-    },
+    }
   ),
 ];
